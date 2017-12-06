@@ -41,6 +41,7 @@ public class Restaurante {
     }
 
     public static void preCargaDeDatos() {
+
         Sistema system = Sistema.getInstancia();
         SistemaMozo sm = system.getSMozos();
         SistemaGestor sg = system.getSGestores();

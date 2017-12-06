@@ -17,6 +17,7 @@ public class Producto {
     private double price;
     private int stock;
     private UPP procesadora;
+
     
     public Producto(String nombre, UPP procesadora) {
         this.codigo = CONTADOR_CODIGO++;
