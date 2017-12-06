@@ -4,7 +4,8 @@ USE Restaurante;
 
 CREATE TABLE TipoCliente(tipo VARCHAR(20) UNIQUE);
 
-CREATE TABLE Cliente(cliente_id INT NOT NULL AUTO_INCREMENT, 
+CREATE TABLE Cliente(oid INT,
+cliente_id INT NOT NULL AUTO_INCREMENT, 
 cliente_nombre VARCHAR(40), 
 cliente_email VARCHAR(70), 
 cliente_tipo VARCHAR(20) NOT NULL, 
