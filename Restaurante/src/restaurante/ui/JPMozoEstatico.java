@@ -10,13 +10,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import restaurante.controladores.CMozoMenu;
 import restaurante.dominio.Mesa;
 import restaurante.dominio.Mozo;
 import restaurante.dominio.Sistema;
 import restaurante.vistas.VMozoMenu;
-
 
 /**
  *
@@ -52,10 +53,10 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     @Override
     public void actualizarProcesadores(String[] procesadoras) {
         this.procesadoras.removeAllItems();
-        if(procesadoras.length == 0) {
+        if (procesadoras.length == 0) {
             this.procesadoras.addItem("Ninguna");
         } else {
-            for(String procesadora : procesadoras) {
+            for (String procesadora : procesadoras) {
                 this.procesadoras.addItem(procesadora);
             }
         }
@@ -64,7 +65,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     @Override
     public String getProcesadoraSeleccionada() {
         Object selectedItem = procesadoras.getSelectedItem();
-        if(selectedItem != null) {
+        if (selectedItem != null) {
             return selectedItem.toString();
         }
         return null;
@@ -73,15 +74,15 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     @Override
     public void actualizarProductos(String[] productos) {
         this.productos.removeAllItems();
-        if(productos.length == 0) {
+        if (productos.length == 0) {
             this.productos.addItem("Ninguna");
         } else {
-            for(String procesadora : productos) {
+            for (String procesadora : productos) {
                 this.productos.addItem(procesadora);
             }
         }
     }
-    
+
     private void clear() {
         cantidad.setText("");
         descripcion.setText("");
@@ -89,7 +90,15 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         controlador.actualizarProductos();
         productos.setSelectedIndex(0);
     }
-    
+
+    @Override
+    public void logOut() {
+       
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.dispose();
+
+    }
+
     public class MesaListener implements ActionListener {
 
         @Override
@@ -105,7 +114,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         }
 
     }
-    
+
     /**
      * Creates new form JPMozoEstatico
      */
@@ -146,7 +155,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         jLabel6 = new javax.swing.JLabel();
         descripcion = new javax.swing.JTextField();
         ingresar = new javax.swing.JButton();
-        toggle1 = new javax.swing.JButton();
+        BtnLogout = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(800, 800));
         setName(""); // NOI18N
@@ -157,17 +166,17 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         add(jLabel1);
         jLabel1.setBounds(20, 300, 114, 40);
 
-        mesaSeleccionadaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mesaSeleccionadaLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mesaSeleccionadaLabel.setText("MESA SELECCIONADA");
         add(mesaSeleccionadaLabel);
-        mesaSeleccionadaLabel.setBounds(10, 11, 136, 17);
+        mesaSeleccionadaLabel.setBounds(10, 10, 178, 22);
 
-        mesaSeleccionada.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        mesaSeleccionada.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mesaSeleccionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mesaSeleccionada.setText("100");
         mesaSeleccionada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         add(mesaSeleccionada);
-        mesaSeleccionada.setBounds(10, 34, 136, 92);
+        mesaSeleccionada.setBounds(200, 10, 136, 30);
 
         toggle.setText("Abrir");
         toggle.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +185,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             }
         });
         add(toggle);
-        toggle.setBounds(10, 130, 136, 34);
+        toggle.setBounds(340, 10, 136, 34);
         add(filler1);
         filler1.setBounds(190, 240, 0, 0);
 
@@ -184,16 +193,16 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
 
         jLabel2.setText("Servicio");
         servicio.add(jLabel2);
-        jLabel2.setBounds(10, 10, 50, 14);
+        jLabel2.setBounds(10, 90, 50, 14);
 
         jScrollPane1.setViewportView(articulos);
 
         servicio.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 30, 150, 160);
+        jScrollPane1.setBounds(10, 110, 660, 130);
 
         jLabel3.setText("Procesadora");
         servicio.add(jLabel3);
-        jLabel3.setBounds(170, 10, 60, 14);
+        jLabel3.setBounds(0, 10, 120, 14);
 
         procesadoras.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         procesadoras.addActionListener(new java.awt.event.ActionListener() {
@@ -202,27 +211,27 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             }
         });
         servicio.add(procesadoras);
-        procesadoras.setBounds(170, 30, 80, 20);
+        procesadoras.setBounds(0, 30, 130, 20);
 
         jLabel4.setText("Artículo");
         servicio.add(jLabel4);
-        jLabel4.setBounds(260, 10, 50, 14);
+        jLabel4.setBounds(140, 10, 90, 14);
 
         productos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         servicio.add(productos);
-        productos.setBounds(260, 30, 90, 20);
+        productos.setBounds(140, 30, 230, 20);
 
         jLabel5.setText("Cantidad");
         servicio.add(jLabel5);
-        jLabel5.setBounds(170, 60, 70, 14);
+        jLabel5.setBounds(390, 10, 70, 14);
         servicio.add(cantidad);
-        cantidad.setBounds(170, 80, 170, 20);
+        cantidad.setBounds(390, 30, 50, 20);
 
         jLabel6.setText("Descripción");
         servicio.add(jLabel6);
-        jLabel6.setBounds(170, 110, 110, 14);
+        jLabel6.setBounds(460, 10, 110, 14);
         servicio.add(descripcion);
-        descripcion.setBounds(170, 130, 170, 20);
+        descripcion.setBounds(460, 30, 210, 20);
 
         ingresar.setText("Ingresar");
         ingresar.addActionListener(new java.awt.event.ActionListener() {
@@ -231,41 +240,41 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             }
         });
         servicio.add(ingresar);
-        ingresar.setBounds(170, 160, 170, 30);
+        ingresar.setBounds(60, 60, 540, 30);
 
         add(servicio);
-        servicio.setBounds(160, 10, 370, 210);
+        servicio.setBounds(10, 50, 670, 250);
         servicio.setVisible(false);
 
-        toggle1.setText("Abrir");
-        toggle1.addActionListener(new java.awt.event.ActionListener() {
+        BtnLogout.setText("Logout");
+        BtnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggle1ActionPerformed(evt);
+                BtnLogoutActionPerformed(evt);
             }
         });
-        add(toggle1);
-        toggle1.setBounds(10, 130, 136, 34);
+        add(BtnLogout);
+        BtnLogout.setBounds(570, 0, 110, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void procesadorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesadorasActionPerformed
-        
+
         controlador.actualizarProductos();
     }//GEN-LAST:event_procesadorasActionPerformed
 
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         String producto = productos.getSelectedItem().toString();
         final String cantidadStr = cantidad.getText();
-        if(cantidadStr.trim().equals("")) {
+        if (cantidadStr.trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Cantidad inválida");
             return;
         }
         int cant = Integer.valueOf(cantidadStr);
-        if(cant <= 0) {
+        if (cant <= 0) {
             JOptionPane.showMessageDialog(this, "Cantidad inválida");
             return;
         }
         String descrip = descripcion.getText();
-        if(!controlador.ingresar(producto, cant, descrip)) {
+        if (!controlador.ingresar(producto, cant, descrip)) {
             JOptionPane.showMessageDialog(this, "Sin stock");
             return;
         }
@@ -273,9 +282,9 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     }//GEN-LAST:event_ingresarActionPerformed
 
     private void toggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleActionPerformed
-        if(controlador.toggleMesaSeleccionada()) {
+        if (controlador.toggleMesaSeleccionada()) {
             String toggleText = toggle.getText();
-            if(toggleText.equals("Abrir")) {
+            if (toggleText.equals("Abrir")) {
                 toggle.setText("Cerrar");
                 servicio.setVisible(true);
             } else {
@@ -287,12 +296,13 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         }
     }//GEN-LAST:event_toggleActionPerformed
 
-    private void toggle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggle1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_toggle1ActionPerformed
+    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+        controlador.logOut();
+    }//GEN-LAST:event_BtnLogoutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnLogout;
     private javax.swing.JList<String> articulos;
     private javax.swing.JTextField cantidad;
     private javax.swing.JTextField descripcion;
@@ -311,23 +321,26 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     private javax.swing.JComboBox<String> productos;
     private javax.swing.JPanel servicio;
     private javax.swing.JButton toggle;
-    private javax.swing.JButton toggle1;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void mostrarMesas(ArrayList<Mesa> mesas) {
         jpMesas.mostrar(mesas, 3);
     }
-    
-   // @Override
-   // public void mostrarTransferir() {
-   //     transferir.setVisible(true);
-   // }
-    
+
+    // @Override
+    // public void mostrarTransferir() {
+    //     transferir.setVisible(true);
+    // }
     @Override
     public void avisarMesaSeleccionada(Mesa mesa) {
         mesaSeleccionada.setText(String.valueOf(mesa.getNumero()));
         mesaSeleccionadaLabel.setVisible(true);
         mesaSeleccionada.setVisible(true);
+    }
+
+    @Override
+    public void error(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
 }

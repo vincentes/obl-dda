@@ -15,10 +15,11 @@ import restaurante.dominio.Mozo;
 public class MozoVentana extends JFrame {
 
     public MozoVentana(Mozo mozo) {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(new JPMozoPrincipal(mozo));
-        setSize(700,700);
+        JPMozoPrincipal principal = new JPMozoPrincipal(mozo);
+        setContentPane(principal);
+        setSize(700,720);
         setTitle(mozo.getNombre());
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 }

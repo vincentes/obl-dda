@@ -41,6 +41,10 @@ public class Sistema {
         return sMozos.login(n, p);
     }
     
+    public boolean logOutMozo(Mozo m){
+        return sMozos.logOut(m);
+    }
+    
     public Gestor loginGestor(String n, String p) {
         return sGestores.login(n, p);
     }
@@ -104,7 +108,7 @@ public class Sistema {
     
 
     public Articulo ingresarArticulo(Producto producto, int cantidad, String descripcion, Servicio servicio) {
-        Articulo articulo = new Articulo(producto, cantidad, servicio);
+        Articulo articulo = new Articulo(producto, cantidad, descripcion, servicio);
         boolean resultado = sServicios.nuevoArticulo(articulo);
         sistemaProcesadora.agregarPedido(articulo, servicio.getMesa().getMozo(), servicio.getMesa());
         if(!resultado) {

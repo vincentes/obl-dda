@@ -19,14 +19,14 @@ public class UPP extends Observable{
     private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
     private ArrayList<Gestor> gestores = new ArrayList<Gestor>();
 
-//     private void avisar(eventos eventos) {
-//        setChanged();
-//        notifyObservers(eventos);
-//    }
+     private void avisarE(eventos eventos) {
+        setChanged();
+        notifyObservers(eventos);
+    }
 
     void quitarPedido(Pedido pedido) {
         pedidos.remove(pedido);
-        avisar(eventos.pedidoEnProceso);
+        avisarE(eventos.pedidoEnProceso);
     }
 
     public boolean logOutGestor(Gestor gestor, UPP upp) {
@@ -38,7 +38,7 @@ public class UPP extends Observable{
         }
     }
     public enum eventos{
-        pedidoEnProceso, pedidoFinalizado;
+        nuevoPedido,pedidoEnProceso, pedidoFinalizado;
     }
     
     public ArrayList<Gestor> getGestores() {
@@ -79,7 +79,11 @@ public class UPP extends Observable{
     }
     
     public boolean agregarPedido(Pedido e) {
-        return pedidos.add(e);
+        
+        boolean ret = pedidos.add(e);
+        avisarE(eventos.nuevoPedido);
+        
+        return ret;
     }
     
     @Override

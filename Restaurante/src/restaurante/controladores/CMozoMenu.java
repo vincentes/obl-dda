@@ -125,5 +125,14 @@ public class CMozoMenu  {
         }
         return articulo != null;
     }
+    
+    public void logOut(){
+        if(Sistema.getInstancia().logOutMozo(mozo)){
+            
+            vista.logOut();
+        }else{
+            vista.error("Usted aún tiene mesas abiertas");
+        }
+    }
 
 }

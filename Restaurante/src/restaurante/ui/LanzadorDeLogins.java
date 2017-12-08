@@ -6,36 +6,21 @@
 package restaurante.ui;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import restaurante.controladores.CLogin;
-import restaurante.dominio.Gestor;
-import restaurante.dominio.ModoSistema;
-import restaurante.dominio.Mozo;
-import restaurante.dominio.Usuario;
-import restaurante.vistas.VLogin;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
- * @author vincentes
+ * @author L&S
  */
-public class LanzadorDeLogins extends javax.swing.JDialog {
+public class LanzadorDeLogins extends javax.swing.JFrame {
 
-    
-    
-    
     /**
-     * Creates new form Login
+     * Creates new form LanzadorDeLogins
      */
-    public LanzadorDeLogins(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-       
+    public LanzadorDeLogins() {
         initComponents();
-        setTitle("Lanzador de Logins:");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500,250);
         setLocationRelativeTo(null);
-        
-        
-       
     }
 
     /**
@@ -47,21 +32,15 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         LoginMozo = new javax.swing.JButton();
         LoginGestor = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login");
-        setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Lanzador de Logins V2:");
 
         LoginMozo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LoginMozo.setText("Nuevo Login Mozo");
@@ -79,10 +58,6 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Lanzador de Logins:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +67,7 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LoginMozo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                         .addComponent(LoginGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -104,7 +79,7 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoginMozo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LoginGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,14 +96,6 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
     private void LoginGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginGestorActionPerformed
         new LoginGestorDialog(null,false).setVisible(true);
     }//GEN-LAST:event_LoginGestorActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosing
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -156,21 +123,11 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(LanzadorDeLogins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LanzadorDeLogins dialog = new LanzadorDeLogins(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new LanzadorDeLogins().setVisible(true);
             }
         });
     }
@@ -180,6 +137,4 @@ public class LanzadorDeLogins extends javax.swing.JDialog {
     private javax.swing.JButton LoginMozo;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-
-
 }

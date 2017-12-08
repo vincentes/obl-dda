@@ -1,4 +1,4 @@
-﻿/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,6 +21,7 @@ import restaurante.dominio.SistemaProcesadora;
 import restaurante.dominio.SistemaUsuario;
 import restaurante.ui.LanzadorDeLogins;
 
+
 /**
  *
  * @author vincentes
@@ -36,7 +37,7 @@ public class Restaurante {
 
         preCargaDeDatos();
         //Lanzamos la ventana de Selección de Login
-        new LanzadorDeLogins(null, false).setVisible(true);
+        new LanzadorDeLogins().setVisible(true);
 
     }
 
@@ -57,9 +58,9 @@ public class Restaurante {
         cocina.agregarProducto(new Producto("Hamburguesa", 150, 200, cocina));
         cocina.agregarProducto(new Producto("Tortilla de papa", 180, 200, cocina));
 
-        bar.agregarProducto(new Producto("Agua mineral sin gas 600ML", 60, 200, cocina));
-        bar.agregarProducto(new Producto("Regresco Naranja 600ML", 80, 200, cocina));
-        bar.agregarProducto(new Producto("Cerveza 900ML", 140, 200, cocina));
+        bar.agregarProducto(new Producto("Agua mineral sin gas 600ML", 60, 200, bar));
+        bar.agregarProducto(new Producto("Regresco Naranja 600ML", 80, 200, bar));
+        bar.agregarProducto(new Producto("Cerveza 900ML", 140, 200, bar));
 
         //Agregamos las UPP:
         sp.agregar(cocina);

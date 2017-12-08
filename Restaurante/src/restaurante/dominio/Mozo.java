@@ -43,9 +43,20 @@ public class Mozo extends Usuario {
     public ArrayList<Mesa> getMesas() {
         return mesas;
     }
+    
+    
 
     public void transferir(Mesa seleccionada) {
         transferencia.add(seleccionada);
         avisar(MozoInternoEvento.PENDIENTE);
+    }
+    
+    public boolean tieneMesasAbiertas(){
+        for(Mesa m : mesas)
+        {
+            if(m.isAbierta())
+                return true;
+        }
+        return false;
     }
 }
