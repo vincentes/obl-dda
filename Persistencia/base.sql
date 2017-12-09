@@ -21,15 +21,15 @@ USE `dan4a`;
 DROP TABLE IF EXISTS `factura`;
 
 CREATE TABLE `factura` (
-  `oid` int(11) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `datosCabezal` varchar(50) NOT NULL,
-  PRIMARY KEY (`numero`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `oid` INT(11) NOT NULL,
+  `numero` INT(11) NOT NULL,
+  `datosCabezal` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`numero`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 /*Data for the table `factura` */
 
-insert  into `factura`(`oid`,`numero`,`datosCabezal`) values 
+INSERT  INTO `factura`(`oid`,`numero`,`datosCabezal`) VALUES 
 (20,5005,'Datos Cabezal nuevo para 5005'),
 (21,5006,'Datos Cabezal nuevo para 5006');
 
@@ -38,16 +38,16 @@ insert  into `factura`(`oid`,`numero`,`datosCabezal`) values
 DROP TABLE IF EXISTS `linea`;
 
 CREATE TABLE `linea` (
-  `oid` int(11) NOT NULL,
-  `numeroF` int(11) NOT NULL,
-  `numeroLinea` int(11) NOT NULL,
-  `datosLinea` varchar(50) NOT NULL,
+  `oid` INT(11) NOT NULL,
+  `numeroF` INT(11) NOT NULL,
+  `numeroLinea` INT(11) NOT NULL,
+  `datosLinea` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`numeroF`,`numeroLinea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 /*Data for the table `linea` */
 
-insert  into `linea`(`oid`,`numeroF`,`numeroLinea`,`datosLinea`) values 
+INSERT  INTO `linea`(`oid`,`numeroF`,`numeroLinea`,`datosLinea`) VALUES 
 (20,5005,1,'Datos linea 1 - 5005'),
 (21,5006,1,'L1 - 5006'),
 (21,5006,2,'L2 - 5006');
@@ -57,13 +57,13 @@ insert  into `linea`(`oid`,`numeroF`,`numeroLinea`,`datosLinea`) values
 DROP TABLE IF EXISTS `oid`;
 
 CREATE TABLE `oid` (
-  `valor` int(11) NOT NULL,
+  `valor` INT(11) NOT NULL,
   PRIMARY KEY (`valor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 /*Data for the table `oid` */
 
-insert  into `oid`(`valor`) values 
+INSERT  INTO `oid`(`valor`) VALUES 
 (23);
 
 /*Table structure for table `usuario` */
@@ -71,15 +71,15 @@ insert  into `oid`(`valor`) values
 DROP TABLE IF EXISTS `usuario`;
 
 CREATE TABLE `usuario` (
-  `oid` int(11) DEFAULT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `oid` INT(11) DEFAULT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`nombre`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`oid`,`nombre`,`password`) values 
+INSERT  INTO `usuario`(`oid`,`nombre`,`password`) VALUES 
 (9,'CAMBIO!','CAMBIOP'),
 (13,'Juan con MapeadorU','mp'),
 (6,'Nuevo','pn'),

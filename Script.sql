@@ -1,39 +1,41 @@
+DROP DATABASE IF EXISTS restaurante;
+
 CREATE DATABASE Restaurante;
 
 USE Restaurante;
 
-CREATE TABLE TipoCliente(tipo VARCHAR(20) UNIQUE);
+DROP TABLE IF EXISTS articulo;
+DROP TABLE IF EXISTS servicio;
+DROP TABLE IF EXISTS oid;
 
-CREATE TABLE Cliente(oid INT,
-cliente_id INT NOT NULL AUTO_INCREMENT, 
-cliente_nombre VARCHAR(40), 
-cliente_email VARCHAR(70), 
-cliente_tipo VARCHAR(20) NOT NULL, 
-PRIMARY KEY (cliente_id), 
-FOREIGN KEY (cliente_tipo) REFERENCES TipoCliente(tipo));
+CREATE TABLE servicio (
+  oid INT NOT NULL,
+  id INT NOT NULL,
+  PRIMARY KEY (id)
+);
 
-CREATE TABLE Servicio(servicio_id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (servicio_id));
+INSERT INTO servicio(oid, id) VALUES(1, 10000), (2, 10001), (3, 10002), (4, 10004);
 
-CREATE TABLE Producto(codigo INT NOT NULL AUTO_INCREMENT,
-nombre VARCHAR(40),
-precio INT NOT NULL,
-stock INT NOT NULL,
-PRIMARY KEY (codigo)); 
+CREATE TABLE articulo (
+oid INT NOT NULL,
+codigo INT NOT NULL,
+producto INT NOT NULL,
+cantidad INT NOT NULL,
+descripcion VARCHAR(200) NOT NULL,
+servicio INT NOT NULL,
+PRIMARY KEY(codigo)
+);
 
-CREATE TABLE Articulo(articulo_codigo INT NOT NULL AUTO_INCREMENT,
-articulo_producto INT,
-articulo_cantidad INT,
-articulo_desc VARCHAR(200),
-articulo_servicio INT,
-FOREIGN KEY (articulo_servicio) REFERENCES Servicio(servicio_id),
-PRIMARY KEY (articulo_codigo),
-FOREIGN KEY (articulo_producto) REFERENCES Producto(codigo));
+INSERT INTO articulo(oid, codigo, producto, cantidad, descripcion, servicio) 
+VALUES(1, 20000, -1, 30, "Todo bien", 10000), (2, 20001, -1, 20, "Quiere papas", 10000),
+(3, 20002, -1, 10, "Sin pepino", 10000),
 
+(4, 20003, -1, 10, "", 10001);
 
-CREATE TABLE ServicioArticulo(servicio_id INT NOT NULL, articulo_codigo INT NOT NULL, FOREIGN KEY (servicio_id) REFERENCES Servicio(servicio_id),
-FOREIGN KEY (articulo_codigo) REFERENCES Articulo(articulo_codigo));
+CREATE TABLE oid (
+valor INT NOT NULL,
+PRIMARY KEY (valor)
+);
 
-
-INSERT INTO tipocliente VALUES("comun"), ("preferencial"), ("casa");
-
+INSERT INTO oid(valor) VALUES(23);
 
