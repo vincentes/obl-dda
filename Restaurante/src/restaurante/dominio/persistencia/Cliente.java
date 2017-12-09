@@ -23,6 +23,10 @@ public class Cliente {
         this.tipo = tipo;
     }
 
+    public Cliente() {
+
+    }    
+
     public int getOid() {
         return oid;
     }
@@ -56,7 +60,7 @@ public class Cliente {
         return nombre;
     }
 
-    public void setName(String name) {
+    public void setNombre(String name) {
         this.nombre = name;
     }
 

@@ -13,6 +13,8 @@ import restaurante.dominio.Servicio;
  */
 public class TipoCasa implements ClienteTipo {
 
+    public static final String ETIQUETA = "casa"; 
+    
     @Override
     public double descuento() {
         return 0;
@@ -20,6 +22,6 @@ public class TipoCasa implements ClienteTipo {
 
     @Override
     public String toString() {
-        return "casa";
+        return ETIQUETA;
     }
 }

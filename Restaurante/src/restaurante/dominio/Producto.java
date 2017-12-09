@@ -17,7 +17,7 @@ public class Producto {
     private double price;
     private int stock;
     private UPP procesadora;
-
+    private int oid;
     
     public Producto(String nombre, UPP procesadora) {
         this.codigo = CONTADOR_CODIGO++;
@@ -38,6 +38,10 @@ public class Producto {
         if(procesadora == null) {
             throw new NullPointerException("procesadora no puede ser null");
         }
+    }
+
+    public Producto() {
+    
     }
 
     public int getCodigo() {
@@ -83,6 +87,16 @@ public class Producto {
         this.procesadora = procesadora;
         
     }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+    
+    
     
     @Override
     public String toString() {

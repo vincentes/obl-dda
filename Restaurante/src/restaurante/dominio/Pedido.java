@@ -31,7 +31,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return articulo.getProducto().getNombre() + " - Cantidad: " + articulo.getCantidad()  + " - " + articulo.getDescription()  + " - Mesa: " + mesa.getNumero()  + " - " + mesa.getMozo().nombre;
+        return articulo.getProducto().getNombre() + " - Cantidad: " + articulo.getCantidad()  + " - " + articulo.getDescripcion()  + " - Mesa: " + mesa.getNumero()  + " - " + mesa.getMozo().nombre;
     }
 
     public boolean isFinalizado() {

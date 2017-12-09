@@ -5,6 +5,8 @@
  */
 package restaurante.dominio;
 
+import persistencia.MapeadorArticulo;
+import persistencia.Persistencia;
 import restaurante.dominio.SistemaServicio.ServicioEvento;
 import restaurante.utils.Observable;
 
@@ -27,6 +29,7 @@ public class SistemaServicio extends Observable<ServicioEvento> {
         if(producto.getStock() >= cantidad) {
             servicio.agregar(new Articulo(producto, cantidad, descripcion, servicio));        
             producto.setStock(producto.getStock() - cantidad);
+            
             avisar(ServicioEvento.ARTICULO_AGREGADO);
             return true;
         } else {
@@ -37,7 +40,7 @@ public class SistemaServicio extends Observable<ServicioEvento> {
     public boolean nuevoArticulo(Articulo articulo) {
         Producto producto = articulo.getProducto();
         int cantidad = articulo.getCantidad();
-        String descripcion = articulo.getDescription();
+        String descripcion = articulo.getDescripcion();
         Servicio servicio = articulo.getServicio();
         if(producto.getStock() >= cantidad) {
             servicio.agregar(articulo);        

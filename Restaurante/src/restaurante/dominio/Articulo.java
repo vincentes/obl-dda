@@ -5,16 +5,21 @@
  */
 package restaurante.dominio;
 
+import persistencia.MapeadorArticulo;
+import persistencia.Persistencia;
+import persistencia.Persistible;
+
 /**
  *
  * @author vincentes
  */
-public class Articulo {
+public class Articulo implements Persistible {
     private static int CONTADOR_ARTICULO = 0;
+    private int oid;
     private int codigo;
     private Producto producto;
     private int cantidad;
-    private String description;
+    private String descripcion;
     private Servicio servicio;
 
     public Articulo(Producto producto, int cantidad, Servicio servicio) {
@@ -27,11 +32,15 @@ public class Articulo {
     public Articulo(Producto producto, int cantidad, String description, Servicio servicio) {
         this.producto = producto;
         this.cantidad = cantidad;
-        this.description = description;
+        this.descripcion = description;
         this.servicio = servicio;
         codigo = CONTADOR_ARTICULO++;
     }
 
+    public Articulo() {
+    
+    }
+    
     public int getCantidad() {
         return cantidad;
     }
@@ -40,12 +49,16 @@ public class Articulo {
         this.cantidad = cantidad;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescripcion(String description) {
+        this.descripcion = description;
+    }
+    
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public Producto getProducto() {
@@ -63,6 +76,26 @@ public class Articulo {
 
     public void setServicio(Servicio servicio) {
         this.servicio = servicio;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+    
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
+    public int getServicioId() {
+        return servicio.getId();
     }
 
     @Override
@@ -90,5 +123,12 @@ public class Articulo {
         return true;
     }
     
-    
+    public int getProductoCodigo() {
+        return producto.getCodigo();
+    }
+
+    @Override
+    public void guardar() {
+        servicio.guardar();
+    }
 }

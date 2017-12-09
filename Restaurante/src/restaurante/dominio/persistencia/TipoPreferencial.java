@@ -11,6 +11,8 @@ package restaurante.dominio.persistencia;
  */
 public class TipoPreferencial implements ClienteTipo {
 
+    public static final String ETIQUETA = "preferencial";
+    
     @Override
     public double descuento() {
         return 0;
@@ -19,6 +21,6 @@ public class TipoPreferencial implements ClienteTipo {
     
     @Override
     public String toString() {
-        return "preferencial";
+        return ETIQUETA;
     }
 }

@@ -11,6 +11,8 @@ package restaurante.dominio.persistencia;
  */
 public class TipoComun implements ClienteTipo {
 
+    public static final String ETIQUETA = "comun"; 
+    
     @Override
     public double descuento() {
         return 0;
@@ -18,6 +20,7 @@ public class TipoComun implements ClienteTipo {
     
     @Override
     public String toString() {
-        return "comun";
+        return ETIQUETA;
     }
+
 }
