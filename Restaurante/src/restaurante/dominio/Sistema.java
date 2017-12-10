@@ -162,5 +162,13 @@ public class Sistema {
     public boolean logOutGestor(Gestor gestor, UPP upp) {
         return sistemaProcesadora.logOutGestor(gestor, upp);
     }
+
+    public boolean logOutMozo(Mozo mozo) {
+        if(sMozos.logout(mozo)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
 }

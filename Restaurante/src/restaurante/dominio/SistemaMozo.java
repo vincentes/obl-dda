@@ -16,6 +16,14 @@ import restaurante.utils.Observable;
 public class SistemaMozo extends Observable<MozoEvento> {
     private ArrayList<Mozo> mozos = new ArrayList();
     private ArrayList<Mozo> mozosLogueados = new ArrayList();
+
+    public boolean logout(Mozo mozo) {
+        if(!mozo.mesasAbiertas()) {
+            mozosLogueados.remove(mozo);
+            return true;
+        }
+        return false;
+    }
     
     public enum MozoEvento {
         LOGEADO

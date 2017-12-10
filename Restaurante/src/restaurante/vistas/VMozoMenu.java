@@ -28,4 +28,8 @@ public interface VMozoMenu {
 
     public void actualizarProductos(String[] prodsStr);
 
+    public void hideServicio();
+
+    public void mostrarServicio();
+
 }

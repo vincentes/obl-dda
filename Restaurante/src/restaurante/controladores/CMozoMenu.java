@@ -43,18 +43,26 @@ public class CMozoMenu  {
 
     public void setSeleccionada(Mesa seleccionada) {
         this.seleccionada = seleccionada;
-        actualizarMesaSeleccionada();
+        vista.habilitarToggle();
+        vista.textoToggle(seleccionada.getAbierta());
+        if(seleccionada.getAbierta()) {
+            vista.mostrarServicio();
+            cargarDatosListas();
+        } else {
+            vista.hideServicio();
+        }
     }
 
     public void actualizarMesaSeleccionada() {
         vista.avisarMesaSeleccionada(seleccionada);
-        vista.habilitarToggle();
-        vista.textoToggle(seleccionada.getAbierta());
     }
     
     public void abrirMesaSeleccionada() {
-        seleccionada.setAbierta(true);
-        cargarDatosListas();
+        if(seleccionada != null) {
+            seleccionada.setAbierta(true);
+            cargarDatosListas();
+            vista.mostrarMesas(mozo.getMesas());
+        } 
     }
 
     public Mesa getSeleccionada() {
@@ -65,11 +73,19 @@ public class CMozoMenu  {
         if(seleccionada.getAbierta()) {
             if(Sistema.getInstancia().isCerreable(seleccionada)) {
                 seleccionada.toggle();
+                vista.deshabilitarAbrir();
+                vista.textoToggle(false);
+                vista.hideServicio();
+                vista.mostrarMesas(mozo.getMesas());
             } else {
                 return false;
             }
         } else {
             seleccionada.toggle();
+            vista.habilitarToggle();
+            vista.textoToggle(true);
+            vista.mostrarMesas(mozo.getMesas());
+            vista.mostrarServicio();
         }
         cargarDatosListas();
         return true;
@@ -105,7 +121,17 @@ public class CMozoMenu  {
     }
     
     public void actualizarProductos() {
-        UPP procesadora = Sistema.getInstancia().procesadora(vista.getProcesadoraSeleccionada());
+        UPP procesadora = Sistema.getInstancia().procesadora("Cocina");
+        ArrayList<Producto> prods = Sistema.getInstancia().productosPorProcesadoraConStock(procesadora);
+        String[] prodsStr = new String[prods.size()];
+        for(int i = 0; i < prods.size(); i++) {
+            prodsStr[i] = prods.get(i).toString();
+        }
+        vista.actualizarProductos(prodsStr);
+    }
+    
+    public void actualizarProductos(String proc) {
+        UPP procesadora = Sistema.getInstancia().procesadora(proc);
         ArrayList<Producto> prods = Sistema.getInstancia().productosPorProcesadoraConStock(procesadora);
         String[] prodsStr = new String[prods.size()];
         for(int i = 0; i < prods.size(); i++) {
@@ -125,5 +151,25 @@ public class CMozoMenu  {
         }
         return articulo != null;
     }
+    
+    public boolean ingresar(Producto producto, int cantidad, String descripcion) {        
+        Articulo articulo = Sistema.getInstancia().ingresarArticulo(producto, cantidad, descripcion, seleccionada.getServicio());
+        if(articulo != null) {
+            actualizarArticulos();
+            actualizarProductos();
+        }
+        return articulo != null;
+    }
 
+    public void cerrarMesaSeleccionada() {
+        if(seleccionada != null) {
+            seleccionada.setAbierta(false);
+            vista.mostrarMesas(mozo.getMesas());
+        }
+    }
+
+    public boolean logout() {
+        return Sistema.getInstancia().logOutMozo(mozo);
+    }
+    
 }

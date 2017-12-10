@@ -42,7 +42,7 @@ public class SistemaServicio extends Observable<ServicioEvento> {
         int cantidad = articulo.getCantidad();
         String descripcion = articulo.getDescripcion();
         Servicio servicio = articulo.getServicio();
-        if(producto.getStock() >= cantidad) {
+        if(producto.getStock() >= cantidad && cantidad > 0) {
             servicio.agregar(articulo);        
             producto.setStock(producto.getStock() - cantidad);
             avisar(ServicioEvento.ARTICULO_AGREGADO);

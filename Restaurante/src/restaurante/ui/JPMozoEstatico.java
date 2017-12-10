@@ -89,6 +89,14 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         controlador.actualizarProductos();
         productos.setSelectedIndex(0);
     }
+
+    @Override
+    public void hideServicio() {
+    }
+
+    @Override
+    public void mostrarServicio() {
+    }
     
     public class MesaListener implements ActionListener {
 
@@ -97,6 +105,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             BotonMesa source = (BotonMesa) e.getSource();
             Mesa seleccionada = source.getMesa();
             controlador.setSeleccionada(seleccionada);
+            controlador.actualizarMesaSeleccionada();
             servicio.setVisible(seleccionada.getAbierta());
             controlador.actualizarArticulos();
             controlador.actualizarProductos();

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author vincentes
  */
 public class Mozo extends Usuario {
+
     
     public enum MozoInternoEvento {
         PENDIENTE
@@ -26,6 +27,15 @@ public class Mozo extends Usuario {
         super(usuario, password);
         mesas = new ArrayList<Mesa>();
         
+    }
+
+    public boolean mesasAbiertas() {
+        for(Mesa mesa : mesas) {
+            if(mesa.isAbierta()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Mozo(String usuario, String password, String nombre) {
@@ -44,8 +54,21 @@ public class Mozo extends Usuario {
         return mesas;
     }
 
+    public Mesa getMesa(int numero) {
+        for(Mesa mesa : mesas) {
+            if(mesa.getNumero() == numero) {
+                return mesa;
+            }
+        }
+        return null;
+    }
+    
     public void transferir(Mesa seleccionada) {
         transferencia.add(seleccionada);
         avisar(MozoInternoEvento.PENDIENTE);
+    }
+    
+    public int getCantMesas() {
+        return mesas.size();
     }
 }
