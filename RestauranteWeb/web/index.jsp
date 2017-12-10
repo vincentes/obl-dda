@@ -12,8 +12,10 @@
         <h1>Login Mozo</h1>
         <h1>
             <form method="post" action="login">
-                Usuario:<input type="text" name="usuario"><br><br>
-                Password:<input type="password" name="pass"><br><br>
+                <label for="usuario">Usuario:</label>
+                <input type="text" name="usuario"><br><br>
+                <label for="pass">Password:</label>
+                <input type="password" name="pass"><br><br>
                 <input type="submit" value="Login">
             </form>
            <br>

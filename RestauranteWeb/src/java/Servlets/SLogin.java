@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import restaurante.dominio.Sistema;
-
 /**
  *
  * @author alumnoFI
@@ -37,8 +36,13 @@ public class SLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        VWLogin vista = new VWLogin();
-        vista.login(request,response);
+        String urlProviene = request.getHeader("referer");
+        if(!(urlProviene.endsWith("/RestauranteWeb/"))) {
+            response.sendRedirect("home.jsp");
+        } else {
+            VWLogin vista = new VWLogin();
+            vista.login(request,response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
