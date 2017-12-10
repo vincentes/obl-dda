@@ -6,12 +6,13 @@
 package restaurante.dominio;
 
 import java.util.ArrayList;
+import restaurante.utils.Observable;
 
 /**
  *
  * @author vincentes
  */
-public class Sistema {
+public class Sistema extends Observable{
 
     //private SistemaUsuario usuarios = new SistemaUsuario();
     private SistemaMozo sMozos = new SistemaMozo();
@@ -164,6 +165,11 @@ public class Sistema {
     }
 
     public boolean logOutGestor(Gestor gestor, UPP upp) {
+        sGestores.logOut(gestor);
         return sistemaProcesadora.logOutGestor(gestor, upp);
+    }
+
+    public void transferirMesa(Mesa seleccionada, Mozo mozoDestino) {
+        sMozos.transferir(mozoDestino, seleccionada);
     }
 }

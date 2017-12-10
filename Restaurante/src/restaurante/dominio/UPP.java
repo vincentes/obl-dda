@@ -7,6 +7,7 @@ package restaurante.dominio;
 
 import java.util.ArrayList;
 import restaurante.utils.Observable;
+import restaurante.utils.Utilidades;
 
 
 /**
@@ -19,17 +20,17 @@ public class UPP extends Observable{
     private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
     private ArrayList<Gestor> gestores = new ArrayList<Gestor>();
 
-     private void avisarE(eventos eventos) {
+     private void avisarE(Utilidades.eventosUPP eventos) {
         setChanged();
         notifyObservers(eventos);
     }
 
     void quitarPedido(Pedido pedido) {
         pedidos.remove(pedido);
-        avisarE(eventos.pedidoEnProceso);
+        avisarE(Utilidades.eventosUPP.pedidoEnProceso);
     }
 
-    public boolean logOutGestor(Gestor gestor, UPP upp) {
+    public boolean logOutGestor(Gestor gestor) {
         if(!gestor.pedidosPendientes()){
             gestores.remove(gestor);
             return true;
@@ -37,9 +38,9 @@ public class UPP extends Observable{
             return false;
         }
     }
-    public enum eventos{
-        nuevoPedido,pedidoEnProceso, pedidoFinalizado;
-    }
+//    public enum eventos{
+//        nuevoPedido,pedidoEnProceso, pedidoFinalizado;
+//    }
     
     public ArrayList<Gestor> getGestores() {
         return gestores;
@@ -81,7 +82,7 @@ public class UPP extends Observable{
     public boolean agregarPedido(Pedido e) {
         
         boolean ret = pedidos.add(e);
-        avisarE(eventos.nuevoPedido);
+        avisarE(Utilidades.eventosUPP.nuevoPedido);
         
         return ret;
     }

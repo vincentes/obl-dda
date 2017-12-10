@@ -55,4 +55,14 @@ public class SistemaGestor {
         }
         return false;
     }
+    
+     public boolean logOut(Gestor g) {
+        
+            if(gestoresLogueados.contains(g)) {
+                gestoresLogueados.remove(g);
+                return true;
+            }
+        
+        return false;
+    }
 }

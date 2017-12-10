@@ -15,6 +15,7 @@ import restaurante.dominio.Usuario;
  */
 public interface VLogin {
     public void login(Gestor usr);
+    public void seleccionUPP(Gestor usr);
     public void login(Mozo usr);
     public void error(String msg);
 }

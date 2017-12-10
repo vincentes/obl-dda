@@ -19,7 +19,16 @@ public class Mozo extends Usuario {
     
     private ArrayList<Mesa> mesas;
     private ArrayList<Mesa> transferencia = new ArrayList<Mesa>();
+    private Transferencia transfer;
     //Seba:
+
+    public Transferencia getTransfer() {
+        return transfer;
+    }
+
+    public void setTransfer(Transferencia transfer) {
+        this.transfer = transfer;
+    }
     
     
     public Mozo(String usuario, String password) {

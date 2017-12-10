@@ -104,6 +104,8 @@ public class Restaurante {
         Gestor g2 = new Gestor("g2", "g2", "Gestor Número 2");
         sg.agregar(g2);
         sp.registrarGestorEnUPP(g2, cocina);
+        sg.agregar(new Gestor("g3", "g3", "Gestor Número 3"));
+        
 
 
         //TEST:

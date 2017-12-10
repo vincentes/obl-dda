@@ -30,5 +30,8 @@ public interface VMozoMenu {
     public void logOut();
     
      public void error(String msg);
+     public void actualizarMozosTransfer(String[] mozosStr);
+
+    public void actualizarTransferencia();
 
 }

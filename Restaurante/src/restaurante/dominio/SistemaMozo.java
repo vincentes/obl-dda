@@ -8,6 +8,7 @@ package restaurante.dominio;
 import java.util.ArrayList;
 import restaurante.dominio.SistemaMozo.MozoEvento;
 import restaurante.utils.Observable;
+import restaurante.utils.Utilidades;
 
 /**
  *
@@ -37,8 +38,12 @@ public class SistemaMozo extends Observable<MozoEvento> {
         return null;
     }
 
-    public void transferir(Mozo mozo, Mesa mesa) {
-
+    public void transferir(Mozo mozoDestino, Mesa mesa) {
+        if(mozosLogueados.contains(mozoDestino))
+        {
+            mozoDestino.setTransfer(new Transferencia(mesa));
+            Sistema.getInstancia().avisar(Utilidades.eventosMozo.mozoTransfer);
+        }
     }
 
     public Mozo login(String n, String p) {
@@ -57,6 +62,7 @@ public class SistemaMozo extends Observable<MozoEvento> {
         if (mozosLogueados.contains(m)) {
             if (!m.tieneMesasAbiertas()) {
                 mozosLogueados.remove(m);
+                Sistema.getInstancia().avisar(Utilidades.eventosMozo.mozoLoginLogout);
                 ret = true;
             }
 

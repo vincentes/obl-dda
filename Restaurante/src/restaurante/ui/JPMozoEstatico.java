@@ -17,6 +17,7 @@ import restaurante.controladores.CMozoMenu;
 import restaurante.dominio.Mesa;
 import restaurante.dominio.Mozo;
 import restaurante.dominio.Sistema;
+import restaurante.dominio.Transferencia;
 import restaurante.vistas.VMozoMenu;
 
 /**
@@ -29,6 +30,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     private JPMozoMesas jpMesas;
     private Mozo mozo;
     private MozoVentana ventana;
+    private Mesa seleccionada;
 
     @Override
     public void deshabilitarAbrir() {
@@ -72,6 +74,23 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     }
 
     @Override
+    public void actualizarMozosTransfer(String[] mozos) {
+        this.mozosTransfer.removeAllItems();
+        if (mozos.length == 0) {
+            ocultarTransferir();
+
+        } else {
+            if (seleccionada != null) {
+                mostrarTransferir();
+                for (String mozo : mozos) {
+                    this.mozosTransfer.addItem(mozo);
+                }
+            }
+
+        }
+    }
+
+    @Override
     public void actualizarProductos(String[] productos) {
         this.productos.removeAllItems();
         if (productos.length == 0) {
@@ -93,10 +112,18 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
 
     @Override
     public void logOut() {
-       
+
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         topFrame.dispose();
 
+    }
+
+    @Override
+    public void actualizarTransferencia() {
+         if(this.mozo.getTransfer()!=null)
+        {
+            new FrameTransferencia(this.mozo.getTransfer()).setVisible(true);
+        }
     }
 
     public class MesaListener implements ActionListener {
@@ -104,12 +131,13 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             BotonMesa source = (BotonMesa) e.getSource();
-            Mesa seleccionada = source.getMesa();
+            seleccionada = source.getMesa();
             controlador.setSeleccionada(seleccionada);
             servicio.setVisible(seleccionada.getAbierta());
             controlador.actualizarArticulos();
             controlador.actualizarProductos();
             controlador.actualizarProcesadores();
+            controlador.actualizarMozosTransferencia();
             clear();
         }
 
@@ -124,8 +152,24 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         this.mozo = mozo;
         mesaSeleccionadaLabel.setVisible(false);
         mesaSeleccionada.setVisible(false);
+        ocultarTransferir();
+
         jpMesas.setListener(new MesaListener());
         controlador = new CMozoMenu(mozo, this);
+    }
+
+    public void ocultarTransferir() {
+        mozosTransfer.setVisible(false);
+        btnTransferir.setVisible(false);
+        LblTituloTransfer.setVisible(false);
+        LblTituloMozoDestino.setVisible(false);
+    }
+
+    public void mostrarTransferir() {
+        mozosTransfer.setVisible(true);
+        btnTransferir.setVisible(true);
+        LblTituloTransfer.setVisible(true);
+        LblTituloMozoDestino.setVisible(true);
     }
 
     /**
@@ -156,6 +200,10 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         descripcion = new javax.swing.JTextField();
         ingresar = new javax.swing.JButton();
         BtnLogout = new javax.swing.JButton();
+        LblTituloTransfer = new javax.swing.JLabel();
+        LblTituloMozoDestino = new javax.swing.JLabel();
+        mozosTransfer = new javax.swing.JComboBox<>();
+        btnTransferir = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(800, 800));
         setName(""); // NOI18N
@@ -164,7 +212,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Tus mesas");
         add(jLabel1);
-        jLabel1.setBounds(20, 300, 114, 40);
+        jLabel1.setBounds(20, 310, 114, 30);
 
         mesaSeleccionadaLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mesaSeleccionadaLabel.setText("MESA SELECCIONADA");
@@ -193,16 +241,16 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
 
         jLabel2.setText("Servicio");
         servicio.add(jLabel2);
-        jLabel2.setBounds(10, 90, 50, 14);
+        jLabel2.setBounds(10, 80, 50, 20);
 
         jScrollPane1.setViewportView(articulos);
 
         servicio.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 110, 660, 130);
+        jScrollPane1.setBounds(10, 100, 660, 110);
 
         jLabel3.setText("Procesadora");
         servicio.add(jLabel3);
-        jLabel3.setBounds(0, 10, 120, 14);
+        jLabel3.setBounds(10, 10, 120, 14);
 
         procesadoras.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         procesadoras.addActionListener(new java.awt.event.ActionListener() {
@@ -211,27 +259,27 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             }
         });
         servicio.add(procesadoras);
-        procesadoras.setBounds(0, 30, 130, 20);
+        procesadoras.setBounds(10, 30, 130, 20);
 
         jLabel4.setText("Artículo");
         servicio.add(jLabel4);
-        jLabel4.setBounds(140, 10, 90, 14);
+        jLabel4.setBounds(150, 10, 90, 14);
 
         productos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         servicio.add(productos);
-        productos.setBounds(140, 30, 230, 20);
+        productos.setBounds(150, 30, 230, 20);
 
         jLabel5.setText("Cantidad");
         servicio.add(jLabel5);
-        jLabel5.setBounds(390, 10, 70, 14);
+        jLabel5.setBounds(400, 10, 70, 14);
         servicio.add(cantidad);
-        cantidad.setBounds(390, 30, 50, 20);
+        cantidad.setBounds(400, 30, 50, 20);
 
         jLabel6.setText("Descripción");
         servicio.add(jLabel6);
-        jLabel6.setBounds(460, 10, 110, 14);
+        jLabel6.setBounds(470, 10, 110, 14);
         servicio.add(descripcion);
-        descripcion.setBounds(460, 30, 210, 20);
+        descripcion.setBounds(470, 30, 190, 20);
 
         ingresar.setText("Ingresar");
         ingresar.addActionListener(new java.awt.event.ActionListener() {
@@ -240,10 +288,10 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             }
         });
         servicio.add(ingresar);
-        ingresar.setBounds(60, 60, 540, 30);
+        ingresar.setBounds(70, 60, 540, 30);
 
         add(servicio);
-        servicio.setBounds(10, 50, 670, 250);
+        servicio.setBounds(10, 100, 670, 210);
         servicio.setVisible(false);
 
         BtnLogout.setText("Logout");
@@ -254,6 +302,32 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         });
         add(BtnLogout);
         BtnLogout.setBounds(570, 0, 110, 23);
+
+        LblTituloTransfer.setText("Transferencia");
+        add(LblTituloTransfer);
+        LblTituloTransfer.setBounds(10, 40, 120, 14);
+
+        LblTituloMozoDestino.setText("Mozo Destino");
+        add(LblTituloMozoDestino);
+        LblTituloMozoDestino.setBounds(10, 60, 120, 14);
+
+        mozosTransfer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        mozosTransfer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mozosTransferActionPerformed(evt);
+            }
+        });
+        add(mozosTransfer);
+        mozosTransfer.setBounds(120, 60, 130, 20);
+
+        btnTransferir.setText("Transferir");
+        btnTransferir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferirActionPerformed(evt);
+            }
+        });
+        add(btnTransferir);
+        btnTransferir.setBounds(260, 60, 110, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void procesadorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesadorasActionPerformed
@@ -300,10 +374,21 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         controlador.logOut();
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
+    private void mozosTransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mozosTransferActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mozosTransferActionPerformed
+
+    private void btnTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirActionPerformed
+        controlador.transferirMesa(mozosTransfer.getSelectedIndex());
+    }//GEN-LAST:event_btnTransferirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnLogout;
+    private javax.swing.JLabel LblTituloMozoDestino;
+    private javax.swing.JLabel LblTituloTransfer;
     private javax.swing.JList<String> articulos;
+    private javax.swing.JButton btnTransferir;
     private javax.swing.JTextField cantidad;
     private javax.swing.JTextField descripcion;
     private javax.swing.Box.Filler filler1;
@@ -317,6 +402,7 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mesaSeleccionada;
     private javax.swing.JLabel mesaSeleccionadaLabel;
+    private javax.swing.JComboBox<String> mozosTransfer;
     private javax.swing.JComboBox<String> procesadoras;
     private javax.swing.JComboBox<String> productos;
     private javax.swing.JPanel servicio;
@@ -337,10 +423,13 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         mesaSeleccionada.setText(String.valueOf(mesa.getNumero()));
         mesaSeleccionadaLabel.setVisible(true);
         mesaSeleccionada.setVisible(true);
+        mostrarTransferir();
+
     }
 
     @Override
     public void error(String msg) {
         JOptionPane.showMessageDialog(this, msg);
+
     }
 }

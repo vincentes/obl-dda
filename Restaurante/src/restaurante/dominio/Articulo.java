@@ -5,6 +5,8 @@
  */
 package restaurante.dominio;
 
+import restaurante.utils.Utilidades;
+
 /**
  *
  * @author vincentes
@@ -16,12 +18,16 @@ public class Articulo {
     private int cantidad;
     private String description;
     private Servicio servicio;
+    private boolean listo;
+    private boolean avisado = false;
+
 
     public Articulo(Producto producto, int cantidad, Servicio servicio) {
         this.producto = producto;
         this.cantidad = cantidad;
         this.servicio = servicio;
         codigo = CONTADOR_ARTICULO++;
+        this.listo = false;
     }
 
     public Articulo(Producto producto, int cantidad, String description, Servicio servicio) {
@@ -30,8 +36,24 @@ public class Articulo {
         this.description = description;
         this.servicio = servicio;
         codigo = CONTADOR_ARTICULO++;
+        this.listo = false;
     }
 
+    public boolean getListo() {
+        return this.listo;
+    }
+
+    public void setListo(boolean listo) {
+        this.listo = listo;
+    }
+    
+     public boolean getAvisado() {
+        return this.avisado;
+    }
+
+    public void setAvisado(boolean a) {
+        this.avisado = a;
+    }
     public int getCantidad() {
         return cantidad;
     }
@@ -54,7 +76,9 @@ public class Articulo {
     
         @Override
     public String toString() {
-        return producto.getNombre() + " x" + cantidad;
+        String status = "Pendiente";
+        if(this.listo) status = "Finalizado";
+        return producto.getNombre() + " x" + cantidad + " - " + status;
     }
 
     public Servicio getServicio() {
