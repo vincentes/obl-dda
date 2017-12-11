@@ -34,4 +34,7 @@ public interface VMozoMenu {
 
     public void actualizarTransferencia();
 
+    public void ocultarServicio();
+    public void ocultarMesas();
+
 }

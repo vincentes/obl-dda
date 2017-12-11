@@ -13,8 +13,17 @@ public class Transferencia {
    
     private Mesa mesa;
 
-    public Transferencia(Mesa mesa) {
-        
+    public Mesa getMesa() {
+        return mesa;
+    }
+    private Mozo mozoDestino; 
+
+    public Mozo getMozoDestino() {
+        return mozoDestino;
+    }
+
+    public Transferencia(Mesa mesa, Mozo mozoDestino) {
+        this.mozoDestino = mozoDestino;
         this.mesa = mesa;
     }
     
@@ -24,5 +33,15 @@ public class Transferencia {
     
     public String datosMesa(){
         return "" + mesa.getNumero();
+    }
+
+    public void realizarTransferencia() {
+        this.mesa.getMozo().getMesas().remove(mesa);
+        this.mesa.getMozo().setTransfer(null);
+        this.mesa.setMozo(mozoDestino);
+        this.mozoDestino.getMesas().add(mesa);
+        this.mozoDestino.setTransfer(null);
+        
+        
     }
 }

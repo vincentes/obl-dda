@@ -173,21 +173,15 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatos(Transferencia transfer) {
-//System.out.println(transfer.datosMesa());
+
         LblSolicitanteNombre.setText(transfer.datosMozo());
         LblMesaNumero.setText(transfer.datosMesa());
-// LblSolicitanteNombre.setText("ds");
-//        LblMesaNumero.setText("ss");
-//TxtPrueba.setText("lala");
+        setTitle("Atención " + transfer.getMozoDestino().getNombre());
     }
 
+ 
     @Override
-    public void aceptar() {
-       System.out.println("Si");
-    }
-
-    @Override
-    public void rechazar() {
-       System.out.println("NO");
+    public void cerrarVentana() {
+        dispose();
     }
 }

@@ -11,7 +11,7 @@ package restaurante.vistas;
  */
 public interface VTransferencia {
     
-    public void aceptar();
-    public void rechazar();
+    public void cerrarVentana();
+    
     
 }

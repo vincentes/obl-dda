@@ -109,11 +109,11 @@ public class Restaurante {
 
 
         //TEST:
-        Articulo art1 = new Articulo(cocina.getProductos().get(0), 2, "Prueba art 1", mesa1.getServicio());
-        mesa1.getServicio().agregar(art1);
-        Pedido ped1 = new Pedido(art1, mesa1);
-
-        cocina.getPedidos().add(ped1);
+//        Articulo art1 = new Articulo(cocina.getProductos().get(0), 2, "Prueba art 1", mesa1.getServicio());
+//        mesa1.getServicio().agregar(art1);
+//        Pedido ped1 = new Pedido(art1, mesa1);
+//
+//        cocina.getPedidos().add(ped1);
 
     }
 

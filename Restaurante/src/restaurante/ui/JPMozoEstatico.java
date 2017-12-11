@@ -18,6 +18,7 @@ import restaurante.dominio.Mesa;
 import restaurante.dominio.Mozo;
 import restaurante.dominio.Sistema;
 import restaurante.dominio.Transferencia;
+import restaurante.utils.Utilidades;
 import restaurante.vistas.VMozoMenu;
 
 /**
@@ -120,10 +121,22 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
 
     @Override
     public void actualizarTransferencia() {
-         if(this.mozo.getTransfer()!=null)
-        {
-            new FrameTransferencia(this.mozo.getTransfer()).setVisible(true);
+        Transferencia transfer = this.mozo.getTransfer();
+        if (transfer != null) {
+            if (transfer.getMozoDestino().equals(mozo)) {
+                new FrameTransferencia(this.mozo.getTransfer()).setVisible(true);
+            }
+
         }
+    }
+
+    @Override
+    public void ocultarServicio() {
+        validate();
+        servicio.setVisible(false);
+        ocultarSeleccionada();
+        ocultarTransferir();
+
     }
 
     public class MesaListener implements ActionListener {
@@ -150,26 +163,36 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         initComponents();
         this.jpMesas = jpMesas;
         this.mozo = mozo;
-        mesaSeleccionadaLabel.setVisible(false);
-        mesaSeleccionada.setVisible(false);
+        ocultarSeleccionada();
         ocultarTransferir();
 
         jpMesas.setListener(new MesaListener());
         controlador = new CMozoMenu(mozo, this);
     }
 
+    public void ocultarSeleccionada() {
+        validate();
+        mesaSeleccionadaLabel.setVisible(false);
+        mesaSeleccionada.setVisible(false);
+
+    }
+
     public void ocultarTransferir() {
+        validate();
         mozosTransfer.setVisible(false);
         btnTransferir.setVisible(false);
         LblTituloTransfer.setVisible(false);
         LblTituloMozoDestino.setVisible(false);
+
     }
 
     public void mostrarTransferir() {
+        validate();
         mozosTransfer.setVisible(true);
         btnTransferir.setVisible(true);
         LblTituloTransfer.setVisible(true);
         LblTituloMozoDestino.setVisible(true);
+
     }
 
     /**
@@ -342,16 +365,23 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
             JOptionPane.showMessageDialog(this, "Cantidad inválida");
             return;
         }
-        int cant = Integer.valueOf(cantidadStr);
-        if (cant <= 0) {
-            JOptionPane.showMessageDialog(this, "Cantidad inválida");
-            return;
+
+        if (Utilidades.esNumero(cantidadStr)) {
+            int cant = Integer.valueOf(cantidadStr);
+
+            if (cant <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a 0");
+                return;
+            }
+            String descrip = descripcion.getText();
+            if (!controlador.ingresar(producto, cant, descrip)) {
+                JOptionPane.showMessageDialog(this, "Sin stock");
+                return;
+            }
+        } else {
+            error("Cantidad Inválida");
         }
-        String descrip = descripcion.getText();
-        if (!controlador.ingresar(producto, cant, descrip)) {
-            JOptionPane.showMessageDialog(this, "Sin stock");
-            return;
-        }
+
         // TODO: ENVIAR A UNIDAD PROCESADORA
     }//GEN-LAST:event_ingresarActionPerformed
 
@@ -411,7 +441,17 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
 
     @Override
     public void mostrarMesas(ArrayList<Mesa> mesas) {
+        validate();
+        jpMesas.setVisible(true);
         jpMesas.mostrar(mesas, 3);
+
+    }
+
+    @Override
+    public void ocultarMesas() {
+        validate();
+        jpMesas.setVisible(false);
+
     }
 
     // @Override
