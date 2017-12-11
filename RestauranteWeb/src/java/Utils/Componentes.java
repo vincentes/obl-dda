@@ -6,7 +6,9 @@
 package Utils;
 
 import java.util.ArrayList;
+import restaurante.dominio.Articulo;
 import restaurante.dominio.Mesa;
+import restaurante.dominio.persistencia.Cliente;
 
 /**
  *
@@ -34,6 +36,18 @@ public class Componentes {
         }
         lista+="</select>";
         return lista;
+    }
+    
+    public static String clienteInfo(ArrayList<Articulo> arts, Cliente cliente, double montoOriginal, double montoDescuento, double descuento) {
+        String info = "<ul>";
+        for(Articulo a : arts) {
+            info += "<li>" + a.toString() + "</li>";
+        }
+        info += "</ul>";
+        info += String.format("Monto: %.2f <br>El monto original era %.2f, se le aplicó un descuento de $%.2f<br/>", montoDescuento, montoOriginal, descuento);
+        info += "Cliente: " + cliente.getNombre() + " (" + cliente.getId() + ")<br/>";
+        info += String.format("Beneficio: %s<br/><button class='btn btn-primary' id='beneficio-cerrarm'>Cerrar mesa</button>", cliente.getTipo());
+        return info;
     }
     
     public static String mesas(ArrayList<Mesa> mesas) {

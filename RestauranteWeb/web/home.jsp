@@ -99,6 +99,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="content">
+                            <div id="modal-beneficio-id">
+                                Puede ser que el cliente tenga algún beneficio<br>
+                                <label for='cliente-id'>Introduzca su ID</label><br>
+                                <input type='text' id='beneficio-id'>
+                                <br/>
+                                <button class='btn btn-primary' id="beneficio-buscar">Buscar</button>
+                                <div id="beneficio-info">
+                                </div>
+                                <div id="beneficio-cliente" hidden>
+                                    
+                                </div>
+                                <p id="error"></p>
+                            </div>
                             <div id="modal-content-id">
                               <!-- content here -->
                             </div>
@@ -109,12 +122,14 @@
                   ...
                 </div>
           </div>
+    }
+    
         </div>
             
             <script src="http://code.jquery.com/jquery-latest.min.js"></script>
             <script type="text/javascript">
                var vistaWeb = new EventSource("mozo?accion=new");
-
+               
                vistaWeb.onerror = function(evento) {
                    vistaWeb.close();
                    alert("Error en la conexion del servidor.");
@@ -125,8 +140,13 @@
                    document.title = evento.data;
                });
                
+               vistaWeb.addEventListener("cerreable", function(e) {
+                   mostrarBeneficioModal();
+               });
+               
                vistaWeb.addEventListener("errorVista", function(evento) {
                    modal("Error", evento.data, "Comprendido");
+                   
                });
                
                vistaWeb.addEventListener("logoutExitoso", function(evento) {
@@ -149,10 +169,13 @@
                     document.getElementById("toggle").style.display = "none"; 
                 },false);
                 
+                vistaWeb.addEventListener("mostrarBeneficioModal", function(e) {
+                    mostrarBeneficioModal(); 
+                });
                 
                 vistaWeb.addEventListener("textoToggle", function (evento){
                     var element = document.getElementById("toggle");
-                    if(evento.data == "true") {
+                    if(evento.data === "true") {
                         element.textContent = "Cerrar";
                     } else {
                         element.textContent = "Abrir";
@@ -180,11 +203,18 @@
                     document.getElementById("procesadores").addEventListener("change", function(e) {
                         var e = document.getElementById("procesadores");
                         $.get("mozo?accion=procesadoraSeleccionada&procesadora=" + e.options[e.selectedIndex].text, function (data) {
-                            
                         });
                     });
                 },false);
                 
+                vistaWeb.addEventListener("beneficio", function(evento) {
+                    $("#beneficio-cliente").empty().append(evento.data);
+                    $("#beneficio-cerrarm").click(function(e) {
+                        $.get("mozo?accion=toggleMesaSeleccionada", function(data) {
+                            cerrarModal();
+                        });
+                    });
+                });
                 
                 vistaWeb.addEventListener("mostrarProductos", function (evento){
                     document.getElementById("serv-productos").innerHTML = evento.data;
@@ -194,14 +224,38 @@
                     document.getElementById("serv").style.display = "none";
                 },false);
                 
+                vistaWeb.addEventListener("errorBeneficio", function (evento){
+                    $("#error").show();
+                    $("#error").text(evento.data);
+                },false);
+                
                 vistaWeb.addEventListener("mostrarServicio", function (evento){
                     document.getElementById("serv").style.display = "display";
                 },false);
                 
-                document.getElementById("toggle").addEventListener("click", function(evento) {
-                    $.get("mozo?accion=toggleMesaSeleccionada", function (data) {
-                        
+                vistaWeb.addEventListener("beneficio", function(e){
+                    $("#beneficio-info").show();
+                    $("#beneficio-cliente").html(e.data);  
+                    $("#beneficio-cliente").show();   
+                    $("#error").hide();
+
+                    $("#beneficio-cerrarm").click(function(e) {
+                        $.get("mozo?accion=toggleMesaSeleccionada", function(data) {
+                            cerrarModal();
+                        });
                     });
+                });
+                
+                document.getElementById("toggle").addEventListener("click", function(evento) {
+                    if($("#toggle").text() === "Abrir") {
+                        $.get("mozo?accion=toggleMesaSeleccionada", function(data) {
+                            
+                        });
+                    } else {
+                        $.get("mozo?accion=pingearMesaNoVacia", function(data) {
+                            
+                        });
+                    }
                 });
                 
                 document.getElementById("modal-button-id").addEventListener("click", cerrarModal);
@@ -209,6 +263,7 @@
                 document.getElementById("modal-cerrar-id").addEventListener("click", cerrarModal);
                 document.getElementById("logout").addEventListener("click", function(e) {
                     $.get("mozo?accion=logout", function(e) {
+                        
                     });
                 });
                 
@@ -221,8 +276,10 @@
                         
                     });
                 });
+                
+                
 
-
+                
                 function mesaClick(e) {
                     var id = e.target.id;
                     var mesas = document.getElementsByClassName("mesa");
@@ -237,14 +294,41 @@
                 };
                 
                 function cerrarModal(e) {
+                    $("#modal-beneficio-id").hide();
+                    $("#beneficio-cliente").empty();
                     document.getElementById("modal-id").classList.remove("active");
                 }
                 
-                function modal(title, message, button) {
-                    document.getElementById("modal-title-id").textContent = title;
-                    document.getElementById("modal-content-id").textContent = message;
-                    document.getElementById("modal-button-id").textContent = button;
+                function mostrarBeneficioModal() {  
+                    $("#error").hide();
+                    $("#modal-beneficio-id").show();
+                    $("#modal-content-id").hide();
+                    $("#beneficio-cliente").empty();
+                    document.getElementById("modal-button-id").style.display = "none";            
                     document.getElementById("modal-id").classList.add("active");
+
+                    $("#beneficio-buscar").click(function(e) {
+                        var id = parseInt($("#beneficio-id").val());
+                        $.get("mozo?accion=buscarBeneficio&id=" + id, function(data) {
+                        });
+                    });
+                    
+
+                };
+                
+                function modal(title, message, button) {
+                    $("#modal-beneficio-id").hide();
+                    $("#modal-content-id").show();
+                    document.getElementById("modal-title-id").textContent = title;
+                    $("#modal-content-id").text(message);
+                    if(button === null) {
+                        document.getElementById("modal-button-id").style.display = "none";
+                    } else {
+                        document.getElementById("modal-button-id").style.display = "block";
+                        document.getElementById("modal-button-id").textContent = button;
+                    }
+                    document.getElementById("modal-id").classList.add("active");
+                    $("#modal-content-id").show();
                 }
                 
                 function logout() {

@@ -35,7 +35,9 @@ public interface VMozoMenu {
     public void actualizarTransferencia();
 
     public void hideServicio();
-
+public void toggleMesaSeleccionada();
     public void mostrarServicio();
+
+    public void mesaNoVacia();
 
 }

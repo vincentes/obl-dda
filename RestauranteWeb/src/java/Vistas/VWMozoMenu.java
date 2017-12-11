@@ -20,6 +20,7 @@ import restaurante.dominio.Mozo;
 import Utils.Componentes;
 import restaurante.dominio.Producto;
 import restaurante.dominio.Sistema;
+import restaurante.dominio.persistencia.Cliente;
 /**
  *
  * @author vincentes
@@ -50,8 +51,13 @@ public class VWMozoMenu implements VMozoMenu {
         }
     }
     
+    @Override
     public void toggleMesaSeleccionada() {
         controlador.toggleMesaSeleccionada();
+    }
+    
+    public void mesaNoVacia() {
+        out.enviar("cerreable", "");
     }
     
     @Override
@@ -128,4 +134,25 @@ public class VWMozoMenu implements VMozoMenu {
     @Override
     public void actualizarTransferencia() {
     }
+
+    public void buscarBeneficio(int numero) {
+        Cliente cliente = Sistema.getInstancia().getCliente(numero);
+        if(cliente == null) {
+            errorBeneficio("Cliente inválido.");
+        }
+        out.enviar("beneficio", Componentes.clienteInfo(controlador.getArticulos(), cliente, controlador.getMonto(), controlador.getAplicarDescuento(cliente), controlador.getDescuento(cliente)));
+    }
+    
+    public void buscarBeneficio(Cliente cliente) {
+        
+    }
+
+    public void errorBeneficio(String msg) {
+        out.enviar("errorBeneficio", msg);
+    }
+
+    public void mesaVacia() {
+        controlador.mesaVacia();
+    }
+
 }

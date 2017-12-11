@@ -5,6 +5,9 @@
  */
 package restaurante.dominio.persistencia;
 
+import restaurante.dominio.Articulo;
+import restaurante.dominio.Servicio;
+
 /**
  *
  * @author vincentes
@@ -43,9 +46,8 @@ public class Cliente {
         this.id = id;
     }
     
-    /** Hay que preguntar sobre la correcta implementacion del descuento **/
-    public double descuento() {
-        return tipo.descuento();
+    public double descuento(Servicio servicio) {
+        return tipo.descuento(servicio);
     }
 
     public String getEmail() {
@@ -71,4 +73,38 @@ public class Cliente {
     public void setTipo(ClienteTipo tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s [%s]", nombre, tipo);
+    }
+
+    
+    
+    
 }

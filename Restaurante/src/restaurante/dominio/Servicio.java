@@ -10,6 +10,7 @@ import persistencia.MapeadorArticulo;
 import persistencia.MapeadorServicio;
 import persistencia.Persistencia;
 import persistencia.Persistible;
+import restaurante.dominio.persistencia.Cliente;
 
 /**
  *
@@ -30,6 +31,21 @@ public class Servicio implements Persistible {
     
     public Servicio() {
         
+    }
+    
+    public double getMonto() {
+        double monto = 0;
+        for(Articulo a : articulos) {
+            monto += a.getMonto();
+        }
+        return monto;
+    }
+    
+    public double getMonto(Cliente cliente) {
+       double monto = getMonto();
+       monto -= cliente.descuento(this);
+       monto = Math.max(monto, 0);
+       return monto;
     }
 
     public boolean agregar(Articulo articulo) {

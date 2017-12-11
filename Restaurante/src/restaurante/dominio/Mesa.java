@@ -5,9 +5,11 @@
  */
 package restaurante.dominio;
 
+import java.util.ArrayList;
 import restaurante.utils.Observable;
 import java.util.Observer;
 import restaurante.dominio.Mesa.Evento;
+import restaurante.dominio.persistencia.Cliente;
 
 /**
  *
@@ -34,6 +36,14 @@ public class Mesa extends Observable<Evento> {
         }
         avisar(Evento.TOGGLE);
     }
+
+    public double getMonto(Cliente cliente) {
+        return servicio.getMonto(cliente);
+    }
+
+    public double getDescuento(Cliente cliente) {
+        return cliente.descuento(servicio);
+    }
     
     public enum Evento {
         TOGGLE
@@ -42,6 +52,10 @@ public class Mesa extends Observable<Evento> {
     public Mesa(int numero, Mozo mozo) {
         this.numero = numero;
         this.mozo = mozo;
+    }
+    
+    public double getMonto() {
+        return servicio.getMonto();
     }
 
     public boolean isAbierta() {
@@ -71,6 +85,12 @@ public class Mesa extends Observable<Evento> {
     public Mozo getMozo() {
         return mozo;
     }
+
+    public ArrayList<Articulo> getArticulos() {
+        return servicio.getArticulos();
+    }
+    
+    
     
     @Override
     public boolean equals(Object obj) {

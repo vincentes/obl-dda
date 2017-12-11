@@ -5,6 +5,7 @@
  */
 package restaurante.dominio.persistencia;
 
+import restaurante.dominio.Articulo;
 import restaurante.dominio.Servicio;
 
 /**
@@ -25,5 +26,5 @@ public interface ClienteTipo {
         return null;
     }
     
-    public double descuento();
+    public double descuento(Servicio articulo);
 }

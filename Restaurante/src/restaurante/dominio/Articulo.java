@@ -45,6 +45,10 @@ public class Articulo implements Persistible {
     
     }
     
+    public double getMonto() {
+        return cantidad * producto.getPrice();
+    }
+    
     public boolean getListo() {
         return this.listo;
     }
@@ -152,5 +156,13 @@ public class Articulo implements Persistible {
     @Override
     public void guardar() {
         servicio.guardar();
+    }
+
+    public String getProductoNombre() {
+        return producto.getNombre();
+    }
+
+    public double getPrecioUnitario() {
+        return producto.getPrice();
     }
 }

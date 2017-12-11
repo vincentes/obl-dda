@@ -8,11 +8,15 @@ package Servlets;
 import Vistas.VWLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.UnsupportedLookAndFeelException;
+import restaurante.Restaurante;
 import restaurante.dominio.Mozo;
 import restaurante.dominio.Sistema;
 /**
@@ -23,7 +27,18 @@ import restaurante.dominio.Sistema;
 public class SLogin extends HttpServlet {
 
     public SLogin() {
-        restaurante.Restaurante.preCargaDeDatos();
+        try {
+            restaurante.Restaurante.preCargaDeDatos();
+            restaurante.Restaurante.main(null);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(SLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(SLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(SLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

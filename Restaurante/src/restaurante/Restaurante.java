@@ -15,10 +15,13 @@ import restaurante.dominio.Pedido;
 import restaurante.dominio.UPP;
 import restaurante.dominio.Producto;
 import restaurante.dominio.Sistema;
+import restaurante.dominio.SistemaCliente;
 import restaurante.dominio.SistemaGestor;
 import restaurante.dominio.SistemaMozo;
 import restaurante.dominio.SistemaProcesadora;
 import restaurante.dominio.SistemaUsuario;
+import restaurante.dominio.persistencia.Cliente;
+import restaurante.dominio.persistencia.ClienteTipo;
 import restaurante.ui.LanzadorDeLogins;
 
 
@@ -38,7 +41,6 @@ public class Restaurante {
         preCargaDeDatos();
         //Lanzamos la ventana de Selección de Login
         new LanzadorDeLogins().setVisible(true);
-
     }
 
     public static void preCargaDeDatos() {
@@ -46,7 +48,7 @@ public class Restaurante {
         Sistema system = Sistema.getInstancia();
         SistemaMozo sm = system.getSMozos();
         SistemaGestor sg = system.getSGestores();
-
+        SistemaCliente sc = system.getSClientes();
         SistemaProcesadora sp = system.getSistemaProcesadora();
 
         //Creación de Unidades Procesadoras de Pedidos:
@@ -62,6 +64,9 @@ public class Restaurante {
         bar.agregarProducto(new Producto("Regresco Naranja 600ML", 80, 200, bar));
         bar.agregarProducto(new Producto("Cerveza 900ML", 140, 200, bar));
 
+        
+        sc.agregar(new Cliente(1, "hola@gmail.com", "Juansito Lopez", ClienteTipo.traducir("casa")));
+        sc.agregar(new Cliente(2, "loca@gmail.com", "Laura Loca", ClienteTipo.traducir("comun")));
         //Agregamos las UPP:
         sp.agregar(cocina);
         sp.agregar(bar);

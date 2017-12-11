@@ -5,6 +5,9 @@
  */
 package restaurante.dominio.persistencia;
 
+import restaurante.dominio.Articulo;
+import restaurante.dominio.Servicio;
+
 /**
  *
  * @author vincentes
@@ -14,8 +17,14 @@ public class TipoComun implements ClienteTipo {
     public static final String ETIQUETA = "comun"; 
     
     @Override
-    public double descuento() {
-        return 0;
+    public double descuento(Servicio servicio) {
+        double descuento = 0;
+        for(Articulo a : servicio.getArticulos()) {
+            if(a.getProductoNombre().equals("Café")) {
+                descuento += a.getMonto();
+            }
+        }
+        return descuento;
     }
     
     @Override

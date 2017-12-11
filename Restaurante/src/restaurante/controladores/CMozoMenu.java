@@ -18,6 +18,7 @@ import restaurante.dominio.Sistema;
 import restaurante.dominio.SistemaMozo;
 import restaurante.dominio.UPP;
 import restaurante.dominio.Usuario;
+import restaurante.dominio.persistencia.Cliente;
 import restaurante.utils.Utilidades;
 import restaurante.vistas.VMozoMenu;
 
@@ -165,7 +166,7 @@ public class CMozoMenu  implements Observer{
         for(int i = 0; i < mozosLogueados().size(); i++) {
             
                 mozosStr[i] = mozosLogueados().get(i).getNombre();
-            
+                
             
         }
         vista.actualizarMozosTransfer(mozosStr);
@@ -213,6 +214,18 @@ public class CMozoMenu  implements Observer{
             return false;
         }
     }
+    
+    public double getMonto() {
+        return seleccionada.getMonto();
+    }
+    
+    public double getAplicarDescuento(Cliente cliente) {
+        return seleccionada.getMonto(cliente);
+    }
+    
+    public double getDescuento(Cliente cliente) {
+        return seleccionada.getDescuento(cliente);
+    }
 
     @Override
     public void update(Observable o, Object evento) {
@@ -252,5 +265,21 @@ public class CMozoMenu  implements Observer{
     public boolean logout() {
         return Sistema.getInstancia().logOutMozo(mozo);
     }
-    
+ 
+    public ArrayList<Articulo> getArticulos() {
+        return seleccionada.getArticulos();
+    }
+
+    public void mesaVacia() {
+        if(Sistema.getInstancia().isCerreable(seleccionada)) {
+            if(seleccionada.getMonto() == 0) {
+                vista.toggleMesaSeleccionada();
+            } else {
+                vista.mesaNoVacia();
+            }
+        }
+        else {
+            vista.toggleMesaSeleccionada();
+        }
+    }
 }

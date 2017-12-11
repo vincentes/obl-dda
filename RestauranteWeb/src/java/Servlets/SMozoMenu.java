@@ -87,6 +87,18 @@ public class SMozoMenu extends HttpServlet {
                         request.getSession().setAttribute("mozo", null);
                     }
                     break;
+                case "buscarBeneficio":
+                    int id = 0;
+                    try {
+                        id = Integer.valueOf(request.getParameter("id"));
+                        vista.buscarBeneficio(id);
+                    } catch(NumberFormatException e) {
+                        vista.errorBeneficio("Cliente inválido.");
+                    }
+                    break;
+                case "pingearMesaNoVacia":
+                    vista.mesaVacia();
+                    break;
             }
           
         }

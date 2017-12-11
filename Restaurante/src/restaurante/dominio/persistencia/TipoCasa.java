@@ -5,6 +5,7 @@
  */
 package restaurante.dominio.persistencia;
 
+import restaurante.dominio.Articulo;
 import restaurante.dominio.Servicio;
 
 /**
@@ -16,8 +17,8 @@ public class TipoCasa implements ClienteTipo {
     public static final String ETIQUETA = "casa"; 
     
     @Override
-    public double descuento() {
-        return 0;
+    public double descuento(Servicio servicio) {
+        return 500;
     }
 
     @Override

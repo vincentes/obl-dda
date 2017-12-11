@@ -6,6 +6,7 @@
 package restaurante.dominio;
 
 import java.util.ArrayList;
+import restaurante.dominio.persistencia.Cliente;
 import restaurante.utils.Observable;
 
 /**
@@ -19,6 +20,7 @@ public class Sistema extends Observable{
     private SistemaGestor sGestores = new SistemaGestor();
     private SistemaServicio sServicios = new SistemaServicio();
     private SistemaProcesadora sistemaProcesadora = new SistemaProcesadora();
+    private SistemaCliente sClientes = new SistemaCliente();
 
     private static Sistema instancia = new Sistema();
     private ModoSistema modo;
@@ -171,5 +173,21 @@ public class Sistema extends Observable{
 
     public void transferirMesa(Mesa seleccionada, Mozo mozoDestino) {
         sMozos.transferir(mozoDestino, seleccionada);
+    }
+
+    public boolean agregarCliente(Cliente e) {
+        return sClientes.agregar(e);
+    }
+
+    public Cliente getCliente(Cliente cliente) {
+        return sClientes.get(cliente);
+    }
+    
+    public Cliente getCliente(int numero) {
+        return sClientes.get(numero);
+    }
+
+    public SistemaCliente getSClientes() {
+        return sClientes;
     }
 }

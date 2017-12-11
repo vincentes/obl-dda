@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/campalans/Persistencia/src/persistencia/Mapeador.java</file>
-            <file>file:/D:/campalans/Persistencia/src/mapeadores/MapeadorFactura.java</file>
-            <file>file:/D:/campalans/Persistencia/src/mapeadores/MapeadorUsuario.java</file>
-            <file>file:/D:/campalans/Persistencia/src/modelo/Linea.java</file>
-            <file>file:/D:/campalans/Persistencia/src/persistencia/Persistencia.java</file>
-            <file>file:/D:/campalans/Persistencia/src/modelo/Factura.java</file>
-            <file>file:/D:/campalans/Persistencia/src/baseDatos/BaseDatos.java</file>
-            <file>file:/D:/campalans/Persistencia/src/baseDatos/Test.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

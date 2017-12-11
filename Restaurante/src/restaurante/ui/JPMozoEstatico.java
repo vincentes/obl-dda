@@ -132,6 +132,16 @@ public class JPMozoEstatico extends javax.swing.JPanel implements VMozoMenu {
         }
     }
 
+    @Override
+    public void toggleMesaSeleccionada() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mesaNoVacia() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public class MesaListener implements ActionListener {
 
         @Override
