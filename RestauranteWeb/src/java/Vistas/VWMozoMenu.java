@@ -155,4 +155,11 @@ public class VWMozoMenu implements VMozoMenu {
         controlador.mesaVacia();
     }
 
+    @Override
+    public void ocultarServicio() {    }
+
+    @Override
+    public void ocultarMesas() {
+    }
+
 }

@@ -5,8 +5,11 @@
  */
 package restaurante;
 
+import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import persistencia.MapeadorArticulo;
+import persistencia.Persistencia;
 import restaurante.dominio.Articulo;
 import restaurante.dominio.Gestor;
 import restaurante.dominio.Mesa;
@@ -14,6 +17,7 @@ import restaurante.dominio.Mozo;
 import restaurante.dominio.Pedido;
 import restaurante.dominio.UPP;
 import restaurante.dominio.Producto;
+import restaurante.dominio.Servicio;
 import restaurante.dominio.Sistema;
 import restaurante.dominio.SistemaCliente;
 import restaurante.dominio.SistemaGestor;
@@ -55,6 +59,7 @@ public class Restaurante {
         UPP cocina = new UPP("Cocina");
         UPP bar = new UPP("Bar");
 
+        
         //Agregamos productos a la UPP:
         cocina.agregarProducto(new Producto("Milanesa al pan", 200, 200, cocina));
         cocina.agregarProducto(new Producto("Hamburguesa", 150, 200, cocina));
@@ -114,11 +119,11 @@ public class Restaurante {
 
 
         //TEST:
-        Articulo art1 = new Articulo(cocina.getProductos().get(0), 2, "Prueba art 1", mesa1.getServicio());
-        mesa1.getServicio().agregar(art1);
-        Pedido ped1 = new Pedido(art1, mesa1);
-
-        cocina.getPedidos().add(ped1);
+//        Articulo art1 = new Articulo(cocina.getProductos().get(0), 2, "Prueba art 1", mesa1.getServicio());
+//        mesa1.getServicio().agregar(art1);
+//        Pedido ped1 = new Pedido(art1, mesa1);
+//
+//        cocina.getPedidos().add(ped1);
 
     }
 

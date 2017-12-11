@@ -6,6 +6,7 @@
 package restaurante.controladores;
 
 import restaurante.dominio.Sistema;
+import restaurante.utils.Utilidades;
 import restaurante.vistas.VTransferencia;
 
 
@@ -27,11 +28,13 @@ public class CTransferencia {
     }
     
     public void aceptar(){
-        vista.aceptar();
+        modelo.avisar(Utilidades.eventosMozo.transferAccepted);
+        vista.cerrarVentana();
     }
     
      public void rechazar(){
-        vista.rechazar();
+        modelo.avisar(Utilidades.eventosMozo.transferRejected);
+        vista.cerrarVentana();
     }
     
 }

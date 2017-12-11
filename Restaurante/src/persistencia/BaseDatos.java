@@ -32,6 +32,7 @@ public class BaseDatos {
     }
     public void conectar(String url,String u,String p){
         try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
             conexion = DriverManager.getConnection(url, u, p);
             stmt = conexion.createStatement();
         } catch (SQLException ex) {

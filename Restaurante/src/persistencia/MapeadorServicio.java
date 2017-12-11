@@ -40,7 +40,7 @@ public class MapeadorServicio implements Mapeador {
     public ArrayList<String> getSqlInsert() {
         ArrayList<String> sqls = new ArrayList();
         sqls.add(String.format(
-                "INSERT INTO Servicio(oid, servicio_id) values(%d, %d)", s.getOid(), s.getId()));
+                "INSERT INTO Servicio(oid, id) values(%d, %d)", s.getOid(), s.getId()));
         return sqls;
     }
 

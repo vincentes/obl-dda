@@ -3,15 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/vistas/VMozoMenu.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/Sistema.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/Servicio.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/Articulo.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/SistemaCliente.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/persistencia/Cliente.java</file>
+            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/SistemaMozo.java</file>
+            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/ui/FrameTransferencia.java</file>
+            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/controladores/CMozoMenu.java</file>
+            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/Restaurante.java</file>
+            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/vistas/VMozoMenu.java</file>
+            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/SistemaProcesadora.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/ui/LoginMozoDialog.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/ui/JPMozoEstatico.java</file>
-            <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/controladores/CMozoMenu.java</file>
             <file>file:/C:/Users/vincentes/Projects/obl-dda/Restaurante/src/restaurante/dominio/Mesa.java</file>
         </group>
     </open-files>

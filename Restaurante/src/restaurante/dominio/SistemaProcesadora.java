@@ -8,6 +8,7 @@ package restaurante.dominio;
 import java.util.ArrayList;
 import java.util.Observer;
 import javafx.beans.Observable;
+import restaurante.utils.Utilidades;
 
 /**
  *
@@ -130,5 +131,17 @@ public class SistemaProcesadora{
 
     public boolean logOutGestor(Gestor gestor, UPP upp) {
         return upp.logOutGestor(gestor);
+    }
+
+    public void updateVentanasGestores() {
+       for(UPP p : procesadoras)
+       {
+           p.avisar(Utilidades.eventosUPP.actualizar);
+       }
+    }
+
+    public Articulo ingresoDeArticulo(Producto producto, int cantidad, String descripcion, Servicio servicio) {
+       return new Articulo(producto, cantidad, descripcion, servicio);
+        
     }
 }

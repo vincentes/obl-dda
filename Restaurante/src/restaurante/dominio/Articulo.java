@@ -5,6 +5,8 @@
  */
 package restaurante.dominio;
 
+import persistencia.MapeadorArticulo;
+import persistencia.Persistencia;
 import persistencia.Persistible;
 
 

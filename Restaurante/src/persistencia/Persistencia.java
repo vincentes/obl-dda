@@ -27,7 +27,7 @@ public class Persistencia {
     public static Persistencia getInstancia() {
         return instancia;
     }
-    private int proximoOid(){
+    public int proximoOid(){
         try {
             String sql = "SELECT valor FROM oid";
             ResultSet rs = base.consultar(sql);

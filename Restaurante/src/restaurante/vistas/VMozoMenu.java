@@ -39,5 +39,7 @@ public void toggleMesaSeleccionada();
     public void mostrarServicio();
 
     public void mesaNoVacia();
+    public void ocultarServicio();
+    public void ocultarMesas();
 
 }

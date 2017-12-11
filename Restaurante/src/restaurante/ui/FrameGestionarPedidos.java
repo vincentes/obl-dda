@@ -156,7 +156,9 @@ public class FrameGestionarPedidos extends javax.swing.JFrame implements VGestio
     @Override
     public void actualizar() {
         
+        validate();
         mostrarPedidos();
+        
     }
 
     @Override

@@ -26,10 +26,19 @@ public class Utilidades {
     }
     
     public enum eventosUPP{
-        nuevoPedido,pedidoEnProceso, pedidoFinalizado;
+        nuevoPedido,pedidoEnProceso, pedidoFinalizado,actualizar;
     }
     
     public enum eventosMozo{
-        mozoLoginLogout, mozoTransfer;
+        mozoLoginLogout, mozoTransfer, transferAccepted, transferRejected, transferCompleted;
+    }
+    
+        public static boolean esNumero(String str){
+    	try {
+    		Integer.parseInt(str);
+    		return true;
+    	} catch (NumberFormatException nfe){
+    		return false;
+    	}
     }
 }

@@ -11,10 +11,11 @@ DROP TABLE IF EXISTS oid;
 CREATE TABLE servicio (
   oid INT NOT NULL,
   id INT NOT NULL,
+  mozoUsuario varchar(20),
   PRIMARY KEY (id)
 );
 
-INSERT INTO servicio(oid, id) VALUES(1, 10000), (2, 10001), (3, 10002), (4, 10004);
+INSERT INTO servicio(oid, id, mozoUsuario) VALUES(1, 10000, 'vincentes'), (2, 10001, ''), (3, 10002, ''), (4, 10004, '');
 
 CREATE TABLE articulo (
 oid INT NOT NULL,

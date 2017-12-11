@@ -111,14 +111,12 @@ public class Sistema extends Observable{
     
 
     public Articulo ingresarArticulo(Producto producto, int cantidad, String descripcion, Servicio servicio) {
-        Articulo articulo = new Articulo(producto, cantidad, descripcion, servicio);
-        boolean resultado = sServicios.nuevoArticulo(articulo);
-        sistemaProcesadora.agregarPedido(articulo, servicio.getMesa().getMozo(), servicio.getMesa());
-        if(!resultado) {
-            articulo = null;
-        } 
+        Articulo articulo = sistemaProcesadora.ingresoDeArticulo( producto,  cantidad,  descripcion,  servicio);
+        servicio.agregar(articulo);
         return articulo;
     }
+    
+    
 
     public void agregarPedido(Articulo articulo, Mozo mozo, Mesa mesa) {
         sistemaProcesadora.agregarPedido(articulo, mozo, mesa);
@@ -133,18 +131,23 @@ public class Sistema extends Observable{
     }
     
     public boolean isCerreable(Mesa seleccionada) {
-        if(seleccionada.getServicio() == null) {
-            return false;
-        }
-        for(Articulo articulo : seleccionada.getServicio().getArticulos()) {
-            if(sistemaProcesadora.estaEnPedido(articulo)) {
-                return false;
+        boolean ret = true;
+        if (seleccionada.getAbierta()) {
+            if (seleccionada.getServicio() == null) {
+                ret = false;
             }
-            if(sGestores.procesando(articulo)) {
-                
+            for (Articulo articulo : seleccionada.getServicio().getArticulos()) {
+                if (Sistema.getInstancia().estaEnPedido(articulo)) {
+                    ret = false;
+                }
             }
         }
-        return true;
+        return ret;
+    }
+    
+    
+    public boolean estaEnPedido(Articulo articulo){
+        return sistemaProcesadora.estaEnPedido(articulo);
     }
     
     //Modificación SEBA 25/10
@@ -171,8 +174,16 @@ public class Sistema extends Observable{
         return sistemaProcesadora.logOutGestor(gestor, upp);
     }
 
-    public void transferirMesa(Mesa seleccionada, Mozo mozoDestino) {
-        sMozos.transferir(mozoDestino, seleccionada);
+    public Transferencia transferirMesa(Mesa seleccionada, Mozo mozoDestino) {
+        return sMozos.transferir(mozoDestino, seleccionada);
+    }
+
+    public void updateVentanasGestores(){
+        sistemaProcesadora.updateVentanasGestores();
+    }
+
+    public boolean nuevoArticulo(Articulo articulo) {
+       return sServicios.nuevoArticulo(articulo);
     }
 
     public boolean agregarCliente(Cliente e) {

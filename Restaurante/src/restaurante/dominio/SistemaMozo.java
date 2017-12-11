@@ -38,11 +38,16 @@ public class SistemaMozo extends Observable<MozoEvento> {
         return null;
     }
 
-    public void transferir(Mozo mozoDestino, Mesa mesa) {
+    public Transferencia transferir(Mozo mozoDestino, Mesa mesa) {
         if(mozosLogueados.contains(mozoDestino))
         {
-            mozoDestino.setTransfer(new Transferencia(mesa));
+            Transferencia tr = new Transferencia(mesa, mozoDestino);
+            mozoDestino.setTransfer(tr);
+            mesa.getMozo().setTransfer(tr);
             Sistema.getInstancia().avisar(Utilidades.eventosMozo.mozoTransfer);
+            return tr;
+        }else{
+            return null;
         }
     }
 
@@ -60,7 +65,7 @@ public class SistemaMozo extends Observable<MozoEvento> {
     public boolean logOut(Mozo m) {
         boolean ret = false;
         if (mozosLogueados.contains(m)) {
-            if (!m.tieneMesasAbiertas()) {
+            if (!m.tieneMesasAbiertas() && m.getTransfer() == null) {
                 mozosLogueados.remove(m);
                 Sistema.getInstancia().avisar(Utilidades.eventosMozo.mozoLoginLogout);
                 ret = true;
