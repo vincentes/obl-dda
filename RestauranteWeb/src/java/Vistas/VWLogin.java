@@ -60,4 +60,8 @@ public class VWLogin implements VLogin {
             Logger.getLogger(VWLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public void seleccionUPP(Gestor usr) {
+    }
 }

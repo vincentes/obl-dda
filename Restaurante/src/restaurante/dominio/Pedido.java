@@ -15,6 +15,7 @@ public class Pedido {
     private Articulo articulo;
     private Mesa mesa;
     private boolean finalizado = false;
+    
 
      public Pedido(Articulo articulo, Mesa mesa) {
         this.articulo = articulo;

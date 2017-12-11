@@ -20,22 +20,22 @@ public class Mozo extends Usuario {
     
     private ArrayList<Mesa> mesas;
     private ArrayList<Mesa> transferencia = new ArrayList<Mesa>();
+    private Transferencia transfer;
     //Seba:
+
+    public Transferencia getTransfer() {
+        return transfer;
+    }
+
+    public void setTransfer(Transferencia transfer) {
+        this.transfer = transfer;
+    }
     
     
     public Mozo(String usuario, String password) {
         super(usuario, password);
         mesas = new ArrayList<Mesa>();
         
-    }
-
-    public boolean mesasAbiertas() {
-        for(Mesa mesa : mesas) {
-            if(mesa.isAbierta()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public Mozo(String usuario, String password, String nombre) {
@@ -53,6 +53,8 @@ public class Mozo extends Usuario {
     public ArrayList<Mesa> getMesas() {
         return mesas;
     }
+    
+    
 
     public Mesa getMesa(int numero) {
         for(Mesa mesa : mesas) {
@@ -70,5 +72,14 @@ public class Mozo extends Usuario {
     
     public int getCantMesas() {
         return mesas.size();
+    }
+    
+    public boolean tieneMesasAbiertas(){
+        for(Mesa m : mesas)
+        {
+            if(m.isAbierta())
+                return true;
+        }
+        return false;
     }
 }

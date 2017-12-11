@@ -27,6 +27,12 @@ public interface VMozoMenu {
     public String getProcesadoraSeleccionada();
 
     public void actualizarProductos(String[] prodsStr);
+    public void logOut();
+    
+     public void error(String msg);
+     public void actualizarMozosTransfer(String[] mozosStr);
+
+    public void actualizarTransferencia();
 
     public void hideServicio();
 

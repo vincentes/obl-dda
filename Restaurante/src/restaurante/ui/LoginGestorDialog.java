@@ -10,6 +10,7 @@ import restaurante.controladores.CLogin;
 import restaurante.dominio.Gestor;
 import restaurante.dominio.ModoSistema;
 import restaurante.dominio.Mozo;
+import restaurante.dominio.Sistema;
 import restaurante.dominio.Usuario;
 import restaurante.vistas.VLogin;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -179,6 +180,13 @@ public class LoginGestorDialog extends javax.swing.JDialog implements VLogin {
 
     @Override
     public void login(Gestor usr) {
+        dispose();
+        FrameGestionarPedidos frame = new FrameGestionarPedidos(usr, usr.getUpp());
+        frame.setVisible(true);
+        Sistema.getInstancia().getsServicios().addObserver(frame);
+    }
+    @Override
+    public void seleccionUPP(Gestor usr) {
         dispose();
         new FrameSeleccionDeUPP(usr).setVisible(true);
     }

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import restaurante.dominio.Mozo;
 import restaurante.dominio.Sistema;
 /**
  *
@@ -36,6 +37,12 @@ public class SLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Mozo mozo = (Mozo) request.getSession(true).getAttribute("mozo");
+        if(mozo != null) {
+            response.sendRedirect("home.jsp");
+            return;
+        }
+        
         String urlProviene = request.getHeader("referer");
         if(!(urlProviene.endsWith("/RestauranteWeb/"))) {
             response.sendRedirect("home.jsp");
@@ -85,3 +92,4 @@ public class SLogin extends HttpServlet {
     }// </editor-fold>
 
 }
+    

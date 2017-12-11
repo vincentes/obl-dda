@@ -184,4 +184,9 @@ public class LoginMozoDialog extends javax.swing.JDialog implements VLogin {
     public void error(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
+
+    @Override
+    public void seleccionUPP(Gestor usr) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

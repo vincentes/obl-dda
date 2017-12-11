@@ -35,6 +35,7 @@ public class CGestionDePedidos implements Observer {
 
     @Override
     public void update(Observable o, Object evento) {
+        
         vista.actualizar();
     }
 

@@ -17,12 +17,20 @@ import restaurante.dominio.Mozo;
  * @author vincentes
  */
 public class JPMozoPrincipal extends JPanel {
-    
+
+    private JPMozoEstatico estatico;
+
     public JPMozoPrincipal(Mozo mozo) {
-        setLayout(new GridLayout(2,1));
+
+        setLayout(new GridLayout(2, 1));
         JPMozoMesas pm = new JPMozoMesas();
-        add(new JPMozoEstatico(pm, mozo));
+        this.estatico = new JPMozoEstatico(pm, mozo);
+        add(this.estatico);
         add(pm);
     }
-    
+
+    public JPMozoEstatico Estatico() {
+        return this.estatico;
+    }
+
 }

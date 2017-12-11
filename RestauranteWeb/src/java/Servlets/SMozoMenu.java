@@ -82,7 +82,7 @@ public class SMozoMenu extends HttpServlet {
                     vista.ingresarArticulo(producto, cantidad, desc);
                     break;
                 case "logout":
-                    if(vista.logout()) {
+                    if(vista.logOutBool()) {
                         request.getSession().setAttribute("vista", null);
                         request.getSession().setAttribute("mozo", null);
                     }

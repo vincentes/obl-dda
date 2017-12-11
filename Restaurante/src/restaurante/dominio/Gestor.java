@@ -6,6 +6,7 @@
 package restaurante.dominio;
 
 import java.util.ArrayList;
+import restaurante.utils.Utilidades;
 
 /**
  *
@@ -40,8 +41,9 @@ public class Gestor extends Usuario {
     }
 
     public void finalizarPedido(Pedido pedido) {
+        pedido.getArticulo().setListo(true);
         this.pedidos.remove(pedido);
-        upp.avisar(UPP.eventos.pedidoFinalizado);
+        upp.avisar(Utilidades.eventosUPP.pedidoFinalizado);
     }
 
     public void registrarUPP(UPP uppRecibida) {

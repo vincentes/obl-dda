@@ -5,9 +5,8 @@
  */
 package restaurante.dominio;
 
-import persistencia.MapeadorArticulo;
-import persistencia.Persistencia;
 import persistencia.Persistible;
+
 
 /**
  *
@@ -21,12 +20,16 @@ public class Articulo implements Persistible {
     private int cantidad;
     private String descripcion;
     private Servicio servicio;
+    private boolean listo;
+    private boolean avisado = false;
+
 
     public Articulo(Producto producto, int cantidad, Servicio servicio) {
         this.producto = producto;
         this.cantidad = cantidad;
         this.servicio = servicio;
         codigo = CONTADOR_ARTICULO++;
+        this.listo = false;
     }
 
     public Articulo(Producto producto, int cantidad, String description, Servicio servicio) {
@@ -35,12 +38,29 @@ public class Articulo implements Persistible {
         this.descripcion = description;
         this.servicio = servicio;
         codigo = CONTADOR_ARTICULO++;
+        this.listo = false;
     }
 
     public Articulo() {
     
     }
     
+    public boolean getListo() {
+        return this.listo;
+    }
+
+    public void setListo(boolean listo) {
+        this.listo = listo;
+    }
+    
+     public boolean getAvisado() {
+        return this.avisado;
+    }
+
+    public void setAvisado(boolean a) {
+        this.avisado = a;
+    }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -67,7 +87,9 @@ public class Articulo implements Persistible {
     
         @Override
     public String toString() {
-        return producto.getNombre() + " x" + cantidad;
+        String status = "Pendiente";
+        if(this.listo) status = "Finalizado";
+        return producto.getNombre() + " x" + cantidad + " - " + status;
     }
 
     public Servicio getServicio() {

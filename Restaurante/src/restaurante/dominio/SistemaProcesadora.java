@@ -13,7 +13,7 @@ import javafx.beans.Observable;
  *
  * @author Usuario7
  */
-public class SistemaProcesadora {
+public class SistemaProcesadora{
 
     private ArrayList<UPP> procesadoras = new ArrayList();
 
@@ -35,6 +35,8 @@ public class SistemaProcesadora {
         }
     }
 
+   
+     
     public void agregarPedido(Articulo articulo, Mozo mozo, Mesa mesa) {
         UPP procesadora = articulo.getProducto().getProcesadora();
         procesadora.agregarPedido(new Pedido(articulo, mesa));
@@ -123,9 +125,10 @@ public class SistemaProcesadora {
 
     public void finalizarPedido(Pedido pedido, Gestor gestor, UPP upp) {
         gestor.finalizarPedido(pedido);
+        
     }
 
     public boolean logOutGestor(Gestor gestor, UPP upp) {
-        return upp.logOutGestor(gestor, upp);
+        return upp.logOutGestor(gestor);
     }
 }

@@ -25,4 +25,11 @@ public class Utilidades {
         }    
     }
     
+    public enum eventosUPP{
+        nuevoPedido,pedidoEnProceso, pedidoFinalizado;
+    }
+    
+    public enum eventosMozo{
+        mozoLoginLogout, mozoTransfer;
+    }
 }

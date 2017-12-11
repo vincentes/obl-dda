@@ -51,10 +51,7 @@ public class VWMozoMenu implements VMozoMenu {
     }
     
     public void toggleMesaSeleccionada() {
-        boolean togleado = controlador.toggleMesaSeleccionada();
-        if(!togleado) {
-            out.enviar("pedidosPendientes", "");
-        }
+        controlador.toggleMesaSeleccionada();
     }
     
     @Override
@@ -107,23 +104,28 @@ public class VWMozoMenu implements VMozoMenu {
     }
 
     public void ingresarArticulo(Producto producto, int cantidad, String desc) {
-        if(cantidad < 1) {
-            out.enviar("cantidadInvalida", "");
-        } else {
-            if(!controlador.ingresar(producto, cantidad, desc)) {
-                out.enviar("sinStock", "");
-            }
-        }
-        
+        controlador.ingresar(producto, cantidad, desc);
     }
 
-    public boolean logout() {
-        if(controlador.logout()) {
-            out.enviar("logoutExitoso", "");
-            return true;
-        } else {
-            out.enviar("logoutFallado", "");
-            return false;
-        }
+    public boolean logOutBool() {
+        return controlador.logOut();
+    }
+
+    @Override
+    public void logOut() {
+        out.enviar("logoutExitoso", "");
+    }
+
+    @Override
+    public void error(String msg) {
+        out.enviar("errorVista", msg);
+    }
+
+    @Override
+    public void actualizarMozosTransfer(String[] mozosStr) {
+    }
+
+    @Override
+    public void actualizarTransferencia() {
     }
 }

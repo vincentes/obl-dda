@@ -117,6 +117,7 @@
 
                vistaWeb.onerror = function(evento) {
                    vistaWeb.close();
+                   alert("Error en la conexion del servidor.");
                    document.location.href = "/RestauranteWeb";
                };
     
@@ -124,24 +125,12 @@
                    document.title = evento.data;
                });
                
-               vistaWeb.addEventListener("pedidosPendientes", function(evento) {
-                   modal("Error", "La mesa seleccionada aún tiene pedidos pendientes. Por favor, espere a que se realicen.", "Comprendido");
-               });
-               
-               vistaWeb.addEventListener("cantidadInvalida", function(evento) {
-                   modal("Error", "Introduciste una cantidad inválida en la orden. Debe ser mayor a 0.", "Comprendido");
-               });
-               
-               vistaWeb.addEventListener("logoutFallado", function(evento) {
-                   modal("Error", "No podés cerrar sesión teniendo mesas abiertas.", "Comprendido");
+               vistaWeb.addEventListener("errorVista", function(evento) {
+                   modal("Error", evento.data, "Comprendido");
                });
                
                vistaWeb.addEventListener("logoutExitoso", function(evento) {
                    logout();
-               });
-               
-               vistaWeb.addEventListener("sinStock", function(evento) {
-                   modal("Error", "Introduciste una cantidad que sobrepasa el stock disponible.", "Comprendido"); 
                });
                
                vistaWeb.addEventListener("mostrarMesas", function (evento){
@@ -232,6 +221,7 @@
                         
                     });
                 });
+
 
                 function mesaClick(e) {
                     var id = e.target.id;

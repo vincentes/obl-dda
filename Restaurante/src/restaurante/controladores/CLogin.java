@@ -10,6 +10,7 @@ import restaurante.dominio.ModoSistema;
 import restaurante.dominio.Mozo;
 import restaurante.dominio.Sistema;
 import restaurante.dominio.Usuario;
+import restaurante.utils.Utilidades;
 import restaurante.vistas.VLogin;
 
 /**
@@ -34,6 +35,7 @@ public class CLogin  {
         Mozo mozo = modelo.getSMozos().login(usuario, password);
         if(mozo != null) {
                     vista.login((Mozo) mozo);
+                    modelo.avisar(Utilidades.eventosMozo.mozoLoginLogout);
                 
         }
         else {
@@ -50,7 +52,12 @@ public class CLogin  {
         
         Gestor gestor = modelo.getSGestores().login(usuario, password);
         if(gestor != null) {
-                    vista.login((Gestor) gestor);
+            if(gestor.getUpp() != null){
+                vista.login((Gestor) gestor);
+            }else{
+                vista.seleccionUPP((Gestor) gestor);
+            }
+                    
                 
         }
         else {
