@@ -79,18 +79,18 @@ public class CMozoMenu implements Observer {
     public boolean toggleMesaSeleccionada() {
         boolean ret = true;
         if (seleccionada.getAbierta()) {
-                    if(seleccionada.getServicio() == null) {
-            ret = false;
-        }
-        for(Articulo articulo : seleccionada.getServicio().getArticulos()) {
-            if(modelo.estaEnPedido(articulo)) {
-                ret= false;
+            if (seleccionada.getServicio() == null) {
+                ret = false;
             }
+            for (Articulo articulo : seleccionada.getServicio().getArticulos()) {
+                if (modelo.estaEnPedido(articulo)) {
+                    ret = false;
+                }
 //            if(sGestores.procesando(articulo)) {
 //                
 //            }
-        }
-        
+            }
+
             if (ret) {
                 seleccionada.toggle();
             } else {
@@ -169,7 +169,7 @@ public class CMozoMenu implements Observer {
     }
 
     public void actualizarTransferencia() {
-
+        
         vista.actualizarTransferencia();
     }
 
@@ -179,10 +179,10 @@ public class CMozoMenu implements Observer {
         Articulo articulo = modelo.ingresarArticulo(prod, cantidad, descripcion, seleccionada.getServicio());
         boolean resultado = modelo.nuevoArticulo(articulo);
         modelo.agregarPedido(articulo, seleccionada.getServicio().getMesa().getMozo(), seleccionada.getServicio().getMesa());
-        if(!resultado) {
+        if (!resultado) {
             articulo = null;
-        } 
-        
+        }
+
         if (articulo != null) {
             actualizarArticulos();
             actualizarProductos();
@@ -198,7 +198,7 @@ public class CMozoMenu implements Observer {
             } else {
                 vista.error("Usted aún tiene mesas abiertas");
             }
-        }else{
+        } else {
             vista.error("Usted aún tiene una transferencia pendiente");
         }
 
@@ -213,6 +213,7 @@ public class CMozoMenu implements Observer {
             actualizarMozosTransferencia();
         }
         if (evento.equals(Utilidades.eventosMozo.mozoTransfer)) {
+
             actualizarTransferencia();
         }
         if (evento.equals(Utilidades.eventosMozo.transferRejected)) {
@@ -269,15 +270,15 @@ public class CMozoMenu implements Observer {
 
     private void transferenciaAceptada() {
         if (transferencia != null) {
+            if (transferencia.getMesa().getMozo().equals(mozo)) {
+                vista.error(transferencia.getMozoDestino().getNombre() + " aceptó la transferencia de la mesa " + transferencia.getMesa().getNumero());
+            }
             transferencia.realizarTransferencia();
             nullearTransfer();
             modelo.avisar(Utilidades.eventosMozo.transferCompleted);
 
 //            if (transferencia.getMozoDestino().equals(mozo)) {
 //                System.out.println("ACC mozo destino recibe mesa tr");
-//            }
-//            if (transferencia.getMesa().getMozo().equals(mozo)) {
-//                System.out.println("ACC mozo origen pierde mesa tr");
 //            }
         }
 

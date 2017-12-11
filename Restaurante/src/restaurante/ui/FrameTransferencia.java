@@ -52,6 +52,8 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
         LblSolicitante = new javax.swing.JLabel();
         LblMesa = new javax.swing.JLabel();
         LblMesaNumero = new javax.swing.JLabel();
+        LblMesaStatus = new javax.swing.JLabel();
+        LblMesaStatusText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -84,12 +86,20 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
         LblSolicitanteNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         LblSolicitante.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblSolicitante.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LblSolicitante.setText("Solicitante:");
 
         LblMesa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblMesa.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LblMesa.setText("Mesa:");
 
         LblMesaNumero.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        LblMesaStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblMesaStatus.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LblMesaStatus.setText("Estado:");
+
+        LblMesaStatusText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,10 +117,15 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
                         .addGroup(layout.createSequentialGroup()
                             .addGap(47, 47, 47)
                             .addComponent(LblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LblMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(LblMesaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(LblMesaStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(LblMesaStatusText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(LblMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(LblMesaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -125,11 +140,15 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
                 .addComponent(LblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(LblSolicitanteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblMesaNumero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblMesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblMesaStatusText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblMesaStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,6 +184,8 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblMesa;
     private javax.swing.JLabel LblMesaNumero;
+    private javax.swing.JLabel LblMesaStatus;
+    private javax.swing.JLabel LblMesaStatusText;
     private javax.swing.JLabel LblSolicitante;
     private javax.swing.JLabel LblSolicitanteNombre;
     private javax.swing.JLabel LblTitulo;
@@ -176,6 +197,7 @@ public class FrameTransferencia extends javax.swing.JFrame implements VTransfere
 
         LblSolicitanteNombre.setText(transfer.datosMozo());
         LblMesaNumero.setText(transfer.datosMesa());
+        LblMesaStatusText.setText(transfer.statusMesa());
         setTitle("Atención " + transfer.getMozoDestino().getNombre());
     }
 

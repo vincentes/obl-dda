@@ -44,4 +44,10 @@ public class Transferencia {
         
         
     }
+
+    public String statusMesa() {
+        if(mesa.isAbierta())
+            return "Abierta";
+        else return "Cerrada";
+    }
 }
